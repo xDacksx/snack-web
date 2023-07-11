@@ -29,7 +29,9 @@ export const MenuItem: FC<MenuItem> = ({
                 <h3>{title}</h3>
                 <p>{description}</p>
                 <span className={styles.quality}>
-                    <span className={styles.price}>${price}</span>
+                    <span className={styles.price}>
+                        <span className={styles.ball} /> ${price}
+                    </span>
                     <span className={styles.stars}>
                         {stars_.map((_e, i) => (
                             <AiFillStar key={i} />
