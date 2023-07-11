@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import { Component } from "../../interfaces/react_element";
 import styles from "../../scss/components/thumbline.module.scss";
 import { MenuButton } from "./menu-button";
-import hamImage from "../../assets/hamburguer.png";
+import hamImage from "../../assets/thumb_hamburguer.png";
 
 export const Thumbline: FC<Component> = ({}): ReactElement => {
     return (
