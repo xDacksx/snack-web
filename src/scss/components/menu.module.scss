@@ -1,0 +1,124 @@
+@use "../colours" as *;
+.menu {
+    background: $c_primary;
+    width: 100%;
+    padding: 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 1rem;
+    align-self: center;
+
+    .item {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 16rem;
+        width: 500px;
+        .image {
+            height: 100%;
+            width: 40%;
+            position: relative;
+            &::before {
+                content: "";
+                display: inline-block;
+                width: 50%;
+                height: 30%;
+                background: $c_secondary;
+                border-radius: 20px;
+                position: absolute;
+                left: 0;
+                top: 25%;
+                z-index: 1;
+                filter: drop-shadow(-4px 4px 1px rgba(0, 0, 0, 0.25));
+            }
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                position: relative;
+                z-index: 2;
+                filter: drop-shadow(-4px 4px 1px rgba(0, 0, 0, 0.25));
+            }
+            pointer-events: none;
+        }
+        .info {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100%;
+            width: 60%;
+            gap: 1rem;
+            pointer-events: none;
+
+            h3 {
+                font-family: "Manual Expanded";
+                text-transform: uppercase;
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1.2rem;
+                text-align: justify;
+            }
+            .quality {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                gap: 1rem;
+                .price {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    background: $c_secondary;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    padding: 0.4rem 1.5rem;
+                    border-radius: 30px;
+                    width: 40%;
+                    padding-left: 3.5rem;
+                    position: relative;
+                    &::after,
+                    &::before {
+                        content: "";
+                        display: inline-block;
+                        width: 1rem;
+                        height: 1rem;
+                        background: $c_primary;
+                        position: absolute;
+                        left: 1rem;
+                        border-radius: 100%;
+                    }
+                    &::after {
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        background: $c_text;
+                        left: 1.1rem;
+                    }
+                }
+                .stars {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 60%;
+                    gap: 0.1rem;
+                    svg {
+                        width: 1.25rem;
+                        height: 1.25rem;
+                    }
+                    p {
+                        font-size: 1.25rem;
+                        font-weight: 500;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
