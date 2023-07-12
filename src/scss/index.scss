@@ -19,5 +19,17 @@ body {
         main {
             height: calc(100% - 3.5rem);
         }
+        .dev-info {
+            position: fixed;
+            left: 0rem;
+            bottom: 0rem;
+            opacity: 0.5;
+            width: 100%;
+            height: fit-content;
+            padding: 1rem;
+            overflow-wrap: anywhere;
+            pointer-events: none;
+            text-shadow: 0 0 5px #000;
+        }
     }
 }

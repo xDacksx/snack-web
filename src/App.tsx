@@ -5,7 +5,7 @@ import { Header } from "./components/header/header";
 import { useAuth } from "./hooks/useAuth";
 
 export const App: FC<Component> = ({}): ReactElement => {
-    const { Auth } = useAuth();
+    const { Auth, AuthStatus } = useAuth();
 
     useEffect(() => {
         Auth();
@@ -16,6 +16,9 @@ export const App: FC<Component> = ({}): ReactElement => {
             <Header />
             <main>
                 <Outlet />
+                <span className="dev-info">
+                    {JSON.stringify(AuthStatus.user)}
+                </span>
             </main>
         </Fragment>
     );
