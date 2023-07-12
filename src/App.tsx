@@ -5,7 +5,7 @@ import { Header } from "./components/header/header";
 import { useAuth } from "./hooks/useAuth";
 
 export const App: FC<Component> = ({}): ReactElement => {
-    const { Auth, AuthStatus } = useAuth();
+    const { Auth, AuthStatus, AppLoading } = useAuth();
 
     useEffect(() => {
         Auth();
@@ -13,13 +13,19 @@ export const App: FC<Component> = ({}): ReactElement => {
 
     return (
         <Fragment>
-            <Header />
-            <main>
-                <Outlet />
-                <span className="dev-info">
-                    {JSON.stringify(AuthStatus.user)}
-                </span>
-            </main>
+            {AppLoading ? (
+                <p>loading</p>
+            ) : (
+                <Fragment>
+                    <Header />
+                    <main>
+                        <Outlet />
+                        <span className="dev-info">
+                            {JSON.stringify(AuthStatus.user)}
+                        </span>
+                    </main>
+                </Fragment>
+            )}
         </Fragment>
     );
 };
