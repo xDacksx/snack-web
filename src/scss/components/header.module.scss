@@ -69,5 +69,17 @@
                 }
             }
         }
+        .noAuthBtn {
+            background: transparent;
+            padding: 2px;
+
+            border: none;
+            color: $c_text;
+            font-weight: 300;
+
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
 }
