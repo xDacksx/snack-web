@@ -16,9 +16,14 @@ export type AuthStatusType = {
 
 export interface UserAuthInfo {
     email: string;
+    password: string;
+
     name: string;
     lastname: string;
-    gender: string;
-    role: string;
+
+    roleId: number;
+    genderId: number;
+
     createdAt: Date;
+    updatedAt: Date | null;
 }
