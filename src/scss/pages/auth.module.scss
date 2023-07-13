@@ -1,0 +1,165 @@
+@use "../colours" as *;
+.authPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+
+    background-image: url("../../assets/pat.svg");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 200%;
+
+    .container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        width: 80%;
+        max-width: 900px;
+        height: clamp(600px, 70%, 90%);
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+
+        form {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            padding: 2rem;
+            gap: 1rem;
+            color: #101727;
+
+            h2 {
+                width: 100%;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            .line {
+                width: 100%;
+                text-align: center;
+                position: relative;
+                z-index: 3;
+                &::after {
+                    content: "";
+                    display: inline-block;
+                    width: 100%;
+                    height: 1px;
+                    background: #101727;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    border-radius: 10px;
+                    opacity: 0.5;
+                    z-index: -2;
+                }
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 2rem;
+                    height: 100%;
+                    background: white;
+                    position: absolute;
+                    left: calc(50% - 1rem);
+                    top: 0;
+                    border-radius: 10px;
+                    z-index: -1;
+                }
+            }
+
+            .instead {
+                display: inline-flex;
+                gap: 0.5rem;
+                width: 100%;
+                color: rgba($color: #101727, $alpha: 0.75);
+                a {
+                    color: #101727;
+                    text-decoration: none;
+                }
+            }
+
+            input {
+                width: 100%;
+                padding: 0.5rem 0rem;
+
+                border: none;
+                border-bottom: 1px solid rgba($color: #101727, $alpha: 0.5);
+                background: transparent;
+
+                transition: 0.25s ease border;
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 1px solid #101727;
+                }
+            }
+            .btn {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                padding: 0.3rem 0.25rem;
+                gap: 0.5rem;
+
+                background: transparent;
+                width: 100%;
+                height: 2rem;
+
+                color: #101727;
+                font-weight: 400;
+                font-family: "Gelion";
+
+                border: 1px solid #101727;
+                border-radius: 6px;
+                cursor: pointer;
+                img {
+                    width: auto;
+                    height: 100%;
+                }
+                transition: 0.25s ease background, 0.25s ease color;
+                &:hover {
+                    background: #101727;
+                    color: white;
+                }
+            }
+            .otherAuth {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+        }
+
+        .thumb {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+            filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .container {
+        width: 100% !important;
+        flex-direction: column !important;
+        form,
+        .thumb {
+            width: 100% !important;
+        }
+    }
+}

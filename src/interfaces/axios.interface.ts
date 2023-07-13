@@ -1,10 +1,17 @@
 import { AxiosResponse } from "axios";
 import { UserAuthInfo } from "./auth.interface";
 
-export interface APIResSessionLogin extends AxiosResponse {
+export interface APIRes<T> extends AxiosResponse {
     data: {
-        data: UserAuthInfo;
+        data: T;
         message: string;
         errors: Array<string>;
     };
 }
+
+export type APIResSessionLogin = APIRes<UserAuthInfo>;
+
+export type APIResSignIn = APIRes<{
+    user: UserAuthInfo;
+    token: string;
+} | null>;

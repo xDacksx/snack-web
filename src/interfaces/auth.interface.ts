@@ -27,3 +27,8 @@ export interface UserAuthInfo {
     createdAt: Date;
     updatedAt: Date | null;
 }
+
+export interface AuthLoginForm {
+    email: string;
+    password: string;
+}
