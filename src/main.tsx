@@ -4,11 +4,14 @@ import { Router } from "./Router.tsx";
 import "./scss/index.scss";
 import React from "react";
 import { AuthProvider } from "./context/auth.context.tsx";
+import { NavProvider } from "./context/nav.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("snack") as HTMLElement).render(
     <React.StrictMode>
         <AuthProvider>
-            <RouterProvider router={Router} />
+            <NavProvider>
+                <RouterProvider router={Router} />
+            </NavProvider>
         </AuthProvider>
     </React.StrictMode>
 );

@@ -18,6 +18,9 @@ body {
         height: 1px;
         main {
             height: calc(100% - 3.5rem);
+            &.nav-open {
+                overflow: hidden;
+            }
         }
         .dev-info {
             position: fixed;
