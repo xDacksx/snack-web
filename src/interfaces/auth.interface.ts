@@ -32,3 +32,12 @@ export interface AuthLoginForm {
     email: string;
     password: string;
 }
+
+export interface ResSignIn {
+    data: {
+        user: UserAuthInfo;
+        token: string;
+    } | null;
+    message: string;
+    errors: Array<string>;
+}

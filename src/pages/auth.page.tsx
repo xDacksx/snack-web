@@ -1,4 +1,4 @@
-import { FC, FormEvent, ReactElement } from "react";
+import { FC, FormEvent, ReactElement, useState } from "react";
 import { Component } from "../interfaces/react_element";
 import styles from "../scss/pages/auth.module.scss";
 import GoogleIcon from "../assets/google_favicon.ico";
@@ -9,10 +9,14 @@ import background from "../assets/auth_background.jpg";
 export const AuthPage: FC<Component> = ({}): ReactElement => {
     const mode = window.location.pathname.split("/auth/")[1];
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     const { SignIn } = useAuth();
 
     async function Login() {
-        await SignIn({ email: "diegozar02@gmail.com", password: "admin" });
+        const data = await SignIn({ email, password });
+        console.log(data);
     }
 
     async function Submit(e: FormEvent) {
@@ -36,8 +40,18 @@ export const AuthPage: FC<Component> = ({}): ReactElement => {
 
                     <p className={styles.line}>or</p>
 
-                    <input type="text" placeholder="Email" />
-                    <input type="text" placeholder="Password" />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
 
                     <button className={styles.btn} type="submit">
                         {mode === "sign-up" ? "Sign up" : "Sign in"}

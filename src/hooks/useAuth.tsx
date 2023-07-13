@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-import { AuthLoginForm, AuthStatusType } from "../interfaces/auth.interface";
+import {
+    AuthLoginForm,
+    AuthStatusType,
+    ResSignIn,
+} from "../interfaces/auth.interface";
 import {
     APIResSessionLogin,
     APIResSignIn,
@@ -42,32 +46,30 @@ export const useAuth = () => {
         }, 100);
     };
 
-    const SignIn = async (Form: AuthLoginForm): Promise<void> => {
+    const SignIn = async (Form: AuthLoginForm): Promise<ResSignIn> => {
         try {
             const { data }: APIResSignIn = await axios.post(
                 `${api}/auth/sign-in`,
                 Form
             );
 
-            console.log(data);
-            if (!data.data) return;
-
-            setAuthStatus({ user: data.data.user });
-            localStorage.setItem("authorization", data.data.token);
-
-            // if (data.errors.length === 0) {
-            //     setAuthStatus({ user: data.data.token });
-            //     if (token) localStorage.setItem("authorization", data.token);
-            //     sessionStorage.setItem("authorization", data.token);
-
-            //     setAppLoading(true);
-
-            //     setTimeout(() => {
-            //         setAppLoading(false);
-            //     }, 300);
-            // }
+            if (data.data) {
+                setAuthStatus({ user: data.data.user });
+                localStorage.setItem("authorization", data.data.token);
+            }
+            return {
+                data: data.data,
+                errors: data.errors,
+                message: data.message,
+            };
         } catch (error) {
-            console.log(error);
+            let msg = "";
+            if (error instanceof Error) msg = error.message;
+            return {
+                data: null,
+                errors: [msg],
+                message: msg,
+            };
         }
     };
 

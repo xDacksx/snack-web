@@ -14,4 +14,4 @@ export type APIResSessionLogin = APIRes<UserAuthInfo>;
 export type APIResSignIn = APIRes<{
     user: UserAuthInfo;
     token: string;
-} | null>;
+}>;
