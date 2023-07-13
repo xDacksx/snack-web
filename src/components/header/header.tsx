@@ -6,6 +6,7 @@ import { FC, ReactElement, Fragment } from "react";
 import { Nav } from "./nav";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { MobileNav } from "./mobile-nav";
 
 export const Header: FC<Component> = ({}): ReactElement => {
     const { AuthStatus } = useAuth();
@@ -25,10 +26,10 @@ export const Header: FC<Component> = ({}): ReactElement => {
                     <Fragment>
                         <p className={style.phone}>{username}</p>
                         <span className={style.info}>
-                            <button>
+                            <button className={style.btn}>
                                 <BsCartFill />
                             </button>
-                            <button className={style.user}>
+                            <button className={style.btn + " " + style.user}>
                                 <BiSolidUser />
                             </button>
                         </span>
@@ -39,6 +40,7 @@ export const Header: FC<Component> = ({}): ReactElement => {
                     </Link>
                 )}
             </div>
+            <MobileNav />
         </header>
     );
 };
