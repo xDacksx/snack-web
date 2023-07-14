@@ -103,6 +103,10 @@ export const useAuth = () => {
 
     const GoogleSignUp = async (): Promise<ResSignUp | void> => {
         try {
+            const url = window.location.origin;
+
+            if (!url.includes("http://localhost")) return;
+
             const provider = new GoogleAuthProvider();
             const data = await signInWithPopup(auth, provider);
 
@@ -141,5 +145,18 @@ export const useAuth = () => {
         }
     };
 
-    return { AuthStatus, AppLoading, Auth, SignIn, SignUp, GoogleSignUp };
+    const LogOut = (): void => {
+        setAuthStatus({ user: null });
+        localStorage.removeItem("authorization");
+    };
+
+    return {
+        AuthStatus,
+        AppLoading,
+        Auth,
+        SignIn,
+        SignUp,
+        GoogleSignUp,
+        LogOut,
+    };
 };
