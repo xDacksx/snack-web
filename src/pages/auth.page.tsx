@@ -8,22 +8,22 @@ import {
 } from "react";
 import { Component } from "../interfaces/react_element";
 import styles from "../scss/pages/auth.module.scss";
-import GoogleIcon from "../assets/google_favicon.ico";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import background from "../assets/auth_background.jpg";
 import { Select, SelectOption } from "../components/dropdown/dropdown";
 import { ResSignUp } from "../interfaces/auth.interface";
+import { GoogleAuth } from "../components/auth/google-auth";
 
 export const AuthPage: FC<Component> = ({}): ReactElement => {
     const mode = window.location.pathname.split("/auth/")[1];
-    const { SignIn, SignUp, GoogleSignUp, AuthStatus } = useAuth();
+    const { SignIn, SignUp, AuthStatus } = useAuth();
 
     const navigate = useNavigate();
 
     useEffect(() => {
         AuthStatus.user && navigate("/");
-    }, []);
+    }, [AuthStatus]);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -84,21 +84,9 @@ export const AuthPage: FC<Component> = ({}): ReactElement => {
                     <form>
                         <h2>{mode === "sign-up" ? "Sign up" : "Sign in"}</h2>
 
-                        <div className={styles.otherAuth}>
-                            <button
-                                type="button"
-                                className={styles.btn}
-                                onClick={
-                                    mode === "sign-up" ? GoogleSignUp : () => {}
-                                }
-                            >
-                                <img src={GoogleIcon} alt="Google icon" />{" "}
-                                {mode === "sign-up" ? "Sign up" : "Sign in"}{" "}
-                                with Google
-                            </button>
-                        </div>
-
-                        <p className={styles.line}>or</p>
+                        {window.location.origin.includes(
+                            "http://localhost"
+                        ) && <GoogleAuth mode={mode} />}
 
                         <input
                             type="email"
