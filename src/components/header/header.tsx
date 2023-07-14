@@ -2,6 +2,7 @@ import style from "../../scss/components/header.module.scss";
 import { Component } from "../../interfaces/react_element";
 import { BsCartFill } from "react-icons/bs";
 import { BiSolidUser } from "react-icons/bi";
+import { TbLogout } from "react-icons/tb";
 import { FC, ReactElement, Fragment } from "react";
 import { Nav } from "./nav";
 import { useAuth } from "../../hooks/useAuth";
@@ -9,7 +10,7 @@ import { Link } from "react-router-dom";
 import { MobileNav } from "./mobile-nav";
 
 export const Header: FC<Component> = ({}): ReactElement => {
-    const { AuthStatus } = useAuth();
+    const { AuthStatus, LogOut } = useAuth();
 
     let username: string = "";
 
@@ -26,11 +27,21 @@ export const Header: FC<Component> = ({}): ReactElement => {
                     <Fragment>
                         <p className={style.phone}>{username}</p>
                         <span className={style.info}>
-                            <button className={style.btn}>
+                            <button className={style.btn} title="Cart">
                                 <BsCartFill />
                             </button>
-                            <button className={style.btn + " " + style.user}>
+                            <button
+                                className={style.btn + " " + style.user}
+                                title="Account"
+                            >
                                 <BiSolidUser />
+                            </button>
+                            <button
+                                className={style.btn + " " + style.user}
+                                title="Log out"
+                                onClick={LogOut}
+                            >
+                                <TbLogout />
                             </button>
                         </span>
                     </Fragment>
