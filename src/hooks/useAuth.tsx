@@ -101,11 +101,16 @@ export const useAuth = () => {
         }
     };
 
-    const GoogleSignUp = async (): Promise<ResSignUp | void> => {
+    const GoogleSignUp = async (): Promise<ResSignUp> => {
         try {
             const url = window.location.origin;
 
-            if (!url.includes("http://localhost")) return;
+            if (!url.includes("http://localhost"))
+                return {
+                    data: null,
+                    errors: [],
+                    message: "You shouldn't be able to see this",
+                };
 
             const provider = new GoogleAuthProvider();
             const data = await signInWithPopup(auth, provider);
@@ -145,6 +150,45 @@ export const useAuth = () => {
         }
     };
 
+    const GoogleSignIn = async (): Promise<ResSignIn> => {
+        try {
+            const url = window.location.origin;
+
+            if (!url.includes("http://localhost"))
+                return {
+                    data: null,
+                    errors: [],
+                    message: "You shouldn't be able to see this",
+                };
+
+            const provider = new GoogleAuthProvider();
+            const data = await signInWithPopup(auth, provider);
+
+            if (!data) throw new Error("Something went wrong!");
+
+            const res = await SignIn({
+                email: data.user.email ?? "",
+                password: data.user.uid,
+            });
+
+            console.log(res);
+
+            return {
+                data: null,
+                errors: [],
+                message: "",
+            };
+        } catch (error) {
+            let msg = "";
+            if (error instanceof Error) msg = error.message;
+            return {
+                data: null,
+                errors: [msg],
+                message: msg,
+            };
+        }
+    };
+
     const LogOut = (): void => {
         setAuthStatus({ user: null });
         localStorage.removeItem("authorization");
@@ -157,6 +201,7 @@ export const useAuth = () => {
         SignIn,
         SignUp,
         GoogleSignUp,
+        GoogleSignIn,
         LogOut,
     };
 };
