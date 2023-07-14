@@ -4,7 +4,7 @@ import styles from "../../scss/pages/auth.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 
 export const GoogleAuth: FC<GoogleAuth> = ({ mode }): ReactElement => {
-    const { GoogleSignUp } = useAuth();
+    const { GoogleSignUp, GoogleSignIn } = useAuth();
 
     return (
         <>
@@ -12,10 +12,10 @@ export const GoogleAuth: FC<GoogleAuth> = ({ mode }): ReactElement => {
                 <button
                     type="button"
                     className={styles.btn}
-                    onClick={mode === "sign-up" ? GoogleSignUp : () => {}}
+                    onClick={mode === "sign-up" ? GoogleSignUp : GoogleSignIn}
                 >
-                    <img src={GoogleIcon} alt="Google icon" />{" "}
-                    {mode === "sign-up" ? "Sign up" : "Sign in"} with Google
+                    <img src={GoogleIcon} alt="Google icon" /> Continue with
+                    Google
                 </button>
             </div>
 
