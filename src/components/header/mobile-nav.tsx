@@ -1,13 +1,14 @@
 import { FC, Fragment, ReactElement, useContext } from "react";
 import { Component } from "../../interfaces/react_element";
 import style from "../../scss/components/header.module.scss";
-
 import { CgMenuBoxed } from "react-icons/cg";
 import { NavContext, NavStatusType } from "../../context/nav.context";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { MobileLink } from "./mobile-link";
 
 export const MobileNav: FC<Component> = (): ReactElement => {
     const { setNavStatus, NavStatus } = useContext(NavContext) as NavStatusType;
+    const { LogOut, AuthStatus } = useAuth();
 
     return (
         <Fragment>
@@ -22,10 +23,22 @@ export const MobileNav: FC<Component> = (): ReactElement => {
                     style.mobile_nav + (NavStatus ? ` ${style.open}` : "")
                 }
             >
-                <Link to="/">Home</Link>
-                <Link to="/">Menu</Link>
-                <Link to="/">Info</Link>
-                <Link to="/">Account</Link>
+                <MobileLink to="/" children="Home" />
+                <MobileLink to="/" children="Menu" />
+                <MobileLink to="/" children="Info" />
+
+                {AuthStatus.user ? (
+                    <Fragment>
+                        <MobileLink to="/" children="Account" />
+                        <MobileLink
+                            to="/"
+                            children="Log out"
+                            onClick={LogOut}
+                        />
+                    </Fragment>
+                ) : (
+                    <MobileLink to="/auth/sign-up" children="Sign up" />
+                )}
             </div>
         </Fragment>
     );
