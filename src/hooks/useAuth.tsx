@@ -3,13 +3,18 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import {
     AuthLoginForm,
+    AuthRegisterForm,
     AuthStatusType,
     ResSignIn,
+    ResSignUp,
 } from "../interfaces/auth.interface";
 import {
     APIResSessionLogin,
     APIResSignIn,
+    APIResSignUp,
 } from "../interfaces/axios.interface";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/config";
 
 const env = import.meta.env;
 const api = env.VITE_SERVER_URL;
@@ -73,5 +78,68 @@ export const useAuth = () => {
         }
     };
 
-    return { AuthStatus, AppLoading, Auth, SignIn };
+    const SignUp = async (Form: AuthRegisterForm): Promise<ResSignUp> => {
+        try {
+            const { data }: APIResSignUp = await axios.post(
+                `${api}/auth/sign-up`,
+                Form
+            );
+
+            return {
+                data: data.data,
+                errors: data.errors,
+                message: data.message,
+            };
+        } catch (error) {
+            let msg = "";
+            if (error instanceof Error) msg = error.message;
+            return {
+                data: null,
+                errors: [msg],
+                message: msg,
+            };
+        }
+    };
+
+    const GoogleSignUp = async (): Promise<ResSignUp | void> => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const data = await signInWithPopup(auth, provider);
+
+            if (!data) throw new Error("Something went wrong!");
+
+            let fullname: string[] = [];
+            let name: string = "";
+            let lastname: string = "";
+            if (data.user.displayName) {
+                fullname = data.user.displayName.split(" ");
+                name = fullname[0] ?? "John";
+                lastname = fullname[1] ?? "Doe";
+            }
+            const user = {
+                email: data.user.email ?? "",
+                password: data.user.uid,
+                name,
+                lastname,
+            };
+
+            const res = await SignUp({ ...user, gender: "male" });
+
+            return {
+                data: res.data,
+                errors: res.errors,
+                message: res.message,
+            };
+        } catch (error) {
+            let msg = "";
+            if (error instanceof Error) msg = error.message;
+            return {
+                data: null,
+                errors: [msg],
+                message: msg,
+            };
+        }
+    };
+
+    return { AuthStatus, AppLoading, Auth, SignIn, SignUp, GoogleSignUp };
 };

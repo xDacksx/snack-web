@@ -32,6 +32,15 @@ export interface AuthLoginForm {
     email: string;
     password: string;
 }
+export interface AuthRegisterForm {
+    email: string;
+    password: string;
+
+    name: string;
+    lastname: string;
+
+    gender: "male" | "female";
+}
 
 export interface ResSignIn {
     data: {
@@ -40,4 +49,19 @@ export interface ResSignIn {
     } | null;
     message: string;
     errors: Array<string>;
+}
+
+export interface ResSignUp {
+    data: UserAuthInfo | null;
+    message: string;
+    errors: string[];
+}
+
+export interface firebaseConfig {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+    storageBucket: string;
+    messagingSenderId: string;
+    appId: string;
 }

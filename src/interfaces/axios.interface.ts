@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { UserAuthInfo } from "./auth.interface";
+import { UserAuthInfo, firebaseConfig } from "./auth.interface";
 
 export interface APIRes<T> extends AxiosResponse {
     data: {
@@ -15,3 +15,7 @@ export type APIResSignIn = APIRes<{
     user: UserAuthInfo;
     token: string;
 }>;
+
+export type APIResSignUp = APIRes<UserAuthInfo>;
+
+export type APIResGoogleSignIn = APIRes<firebaseConfig>;

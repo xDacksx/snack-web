@@ -12,16 +12,28 @@ export const AuthPage: FC<Component> = ({}): ReactElement => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { SignIn } = useAuth();
+    const { SignIn, SignUp, GoogleSignUp } = useAuth();
 
     async function Login() {
         const data = await SignIn({ email, password });
         console.log(data);
     }
 
+    async function Register() {
+        const data = await SignUp({
+            email: "diegozar03@gmail.com",
+            password: "123456",
+            name: "Diego",
+            lastname: "Zamora",
+            gender: "male",
+        });
+
+        console.log(data);
+    }
+
     async function Submit(e: FormEvent) {
         e.preventDefault();
-        mode === "sign-up" ? "Sign up" : Login();
+        mode === "sign-up" ? Register() : Login();
     }
 
     return (
@@ -31,7 +43,13 @@ export const AuthPage: FC<Component> = ({}): ReactElement => {
                     <h2>{mode === "sign-up" ? "Sign up" : "Sign in"}</h2>
 
                     <div className={styles.otherAuth}>
-                        <button className={styles.btn}>
+                        <button
+                            type="button"
+                            className={styles.btn}
+                            onClick={
+                                mode === "sign-up" ? GoogleSignUp : () => {}
+                            }
+                        >
                             <img src={GoogleIcon} alt="Google icon" />{" "}
                             {mode === "sign-up" ? "Sign up" : "Sign in"} with
                             Google
