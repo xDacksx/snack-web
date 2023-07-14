@@ -135,6 +135,28 @@
                 gap: 1rem;
                 width: 100%;
             }
+            .box {
+                background: #bbd0ff;
+                padding: 1rem;
+                border-radius: 6px;
+                border: 1px solid #00a6fb;
+                width: 100%;
+                font-size: 0.9rem;
+                font-weight: 500;
+
+                &.green {
+                    background: #abff4f;
+                    border-color: #29bf12;
+                }
+                &.red {
+                    background: #ef233c;
+                    border-color: #d90429;
+                    color: white;
+                }
+                h2 {
+                    font-weight: 500;
+                }
+            }
         }
 
         .thumb {
@@ -149,12 +171,18 @@
 }
 
 @media (max-width: 1199px) {
-    .container {
-        width: 100% !important;
-        flex-direction: column !important;
-        form,
-        .thumb {
+    .authPage {
+        padding: 1rem 2rem;
+        .container {
             width: 100% !important;
+            flex-direction: column !important;
+            form {
+                width: 100% !important;
+                padding: 1rem;
+            }
+            .thumb {
+                display: none;
+            }
         }
     }
 }
