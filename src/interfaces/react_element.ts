@@ -4,5 +4,5 @@ export type ReactElement = HTMLAttributes<HTMLDivElement>;
 
 export interface Component {
     className?: string;
-    children?: JSX.Element | JSX.Element[];
+    children?: JSX.Element | JSX.Element[] | string | string[];
 }

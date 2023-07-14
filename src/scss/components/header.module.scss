@@ -128,12 +128,17 @@
             left: 0;
             top: calc(3.5rem - 1px);
         }
-        a {
+        .link {
+            border: none;
+            font-size: 1rem;
+            font-family: "Gelion";
+            text-align: left;
             border-bottom: 1px solid $c_text;
             padding: 1rem;
             text-decoration: none;
             color: $c_text;
             background: rgba($color: $c_text, $alpha: 0);
+            cursor: pointer;
             &:hover {
                 background: rgba($color: $c_text, $alpha: 0.1);
             }
