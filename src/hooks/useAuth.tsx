@@ -9,6 +9,7 @@ import {
     ResSignUp,
 } from "../interfaces/auth.interface";
 import {
+    APIResGoogleAuth,
     APIResSessionLogin,
     APIResSignIn,
     APIResSignUp,
@@ -101,7 +102,7 @@ export const useAuth = () => {
         }
     };
 
-    const GoogleSignUp = async (): Promise<ResSignUp> => {
+    const GoogleAuth = async (): Promise<ResSignIn> => {
         try {
             const url = window.location.origin;
 
@@ -113,71 +114,38 @@ export const useAuth = () => {
                 };
 
             const provider = new GoogleAuthProvider();
-            const data = await signInWithPopup(auth, provider);
+            const res = await signInWithPopup(auth, provider);
 
-            if (!data) throw new Error("Something went wrong!");
+            if (!res) throw new Error("Something went wrong!");
 
             let fullname: string[] = [];
             let name: string = "";
             let lastname: string = "";
-            if (data.user.displayName) {
-                fullname = data.user.displayName.split(" ");
+            if (res.user.displayName) {
+                fullname = res.user.displayName.split(" ");
                 name = fullname[0] ?? "John";
                 lastname = fullname[1] ?? "Doe";
             }
-            const user = {
-                email: data.user.email ?? "",
-                password: data.user.uid,
+            const Form = {
+                email: res.user.email ?? "",
+                password: res.user.uid,
                 name,
                 lastname,
             };
 
-            const res = await SignUp({ ...user, gender: "male" });
+            const { data }: APIResGoogleAuth = await axios.post(
+                `${api}/auth/google-auth`,
+                Form
+            );
 
-            return {
-                data: res.data,
-                errors: res.errors,
-                message: res.message,
-            };
-        } catch (error) {
-            let msg = "";
-            if (error instanceof Error) msg = error.message;
-            return {
-                data: null,
-                errors: [msg],
-                message: msg,
-            };
-        }
-    };
-
-    const GoogleSignIn = async (): Promise<ResSignIn> => {
-        try {
-            const url = window.location.origin;
-
-            if (!url.includes("http://localhost"))
-                return {
-                    data: null,
-                    errors: [],
-                    message: "You shouldn't be able to see this",
-                };
-
-            const provider = new GoogleAuthProvider();
-            const data = await signInWithPopup(auth, provider);
-
-            if (!data) throw new Error("Something went wrong!");
-
-            const res = await SignIn({
-                email: data.user.email ?? "",
-                password: data.user.uid,
-            });
-
-            console.log(res);
-
-            return {
-                data: null,
-                errors: [],
-                message: "",
-            };
+            if (data.data) {
+                return await SignIn({
+                    email: Form.email,
+                    password: Form.password,
+                });
+            } else {
+                throw new Error("Something went wrong!");
+            }
         } catch (error) {
             let msg = "";
             if (error instanceof Error) msg = error.message;
@@ -200,8 +168,7 @@ export const useAuth = () => {
         Auth,
         SignIn,
         SignUp,
-        GoogleSignUp,
-        GoogleSignIn,
+        GoogleAuth,
         LogOut,
     };
 };

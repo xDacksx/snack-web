@@ -16,6 +16,16 @@ export type APIResSignIn = APIRes<{
     token: string;
 }>;
 
+export type APIResGoogleAuth = APIRes<{
+    mode: "sign-in" | "sign-up";
+    data:
+        | UserAuthInfo
+        | {
+              user: UserAuthInfo;
+              token: string;
+          };
+} | null>;
+
 export type APIResSignUp = APIRes<UserAuthInfo>;
 
 export type APIResGoogleSignIn = APIRes<firebaseConfig>;

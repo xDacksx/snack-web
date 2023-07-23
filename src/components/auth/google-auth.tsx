@@ -3,17 +3,13 @@ import GoogleIcon from "../../assets/google_favicon.ico";
 import styles from "../../scss/pages/auth.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 
-export const GoogleAuth: FC<GoogleAuth> = ({ mode }): ReactElement => {
-    const { GoogleSignUp, GoogleSignIn } = useAuth();
+export const GoogleAuth: FC = (): ReactElement => {
+    const { GoogleAuth: Auth } = useAuth();
 
     return (
         <>
             <div className={styles.otherAuth}>
-                <button
-                    type="button"
-                    className={styles.btn}
-                    onClick={mode === "sign-up" ? GoogleSignUp : GoogleSignIn}
-                >
+                <button type="button" className={styles.btn} onClick={Auth}>
                     <img src={GoogleIcon} alt="Google icon" /> Continue with
                     Google
                 </button>
@@ -23,7 +19,3 @@ export const GoogleAuth: FC<GoogleAuth> = ({ mode }): ReactElement => {
         </>
     );
 };
-
-interface GoogleAuth {
-    mode: string;
-}

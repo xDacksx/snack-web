@@ -86,7 +86,7 @@ export const AuthPage: FC<Component> = ({}): ReactElement => {
 
                         {window.location.origin.includes(
                             "http://localhost"
-                        ) && <GoogleAuth mode={mode} />}
+                        ) && <GoogleAuth />}
 
                         <input
                             type="email"
