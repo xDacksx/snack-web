@@ -30,12 +30,13 @@ export const Header: FC<Component> = ({}): ReactElement => {
                             <button className={style.btn} title="Cart">
                                 <BsCartFill />
                             </button>
-                            <button
+                            <Link
                                 className={style.btn + " " + style.user}
                                 title="Account"
+                                to="/account"
                             >
                                 <BiSolidUser />
-                            </button>
+                            </Link>
                             <button
                                 className={style.btn + " " + style.user}
                                 title="Log out"
