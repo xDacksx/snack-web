@@ -30,15 +30,21 @@ export type APIResSignUp = APIRes<UserAuthInfo>;
 
 export type APIResGoogleSignIn = APIRes<firebaseConfig>;
 
-export type APIResGetRole = APIRes<{
+interface Role {
     id: number;
     name: string;
     createdAt: Date;
     updatedAt: Date;
-}>;
-export type APIResGetGender = APIRes<{
+}
+type Gender = {
     id: number;
     name: string;
     createdAt: Date;
     updatedAt: Date;
-}>;
+};
+
+export type APIResGetRole = APIRes<Role>;
+export type APIResGetGender = APIRes<Gender>;
+
+export type APIResGetAllRoles = AxiosResponse<Role[]>;
+export type APIResGetAllGenders = AxiosResponse<Gender[]>;
