@@ -44,7 +44,21 @@ export const useAuth = () => {
             const user = data.data;
 
             if (data.errors.length > 0) setAuthStatus({ user: null });
-            else setAuthStatus({ user });
+            else
+                setAuthStatus({
+                    user: {
+                        email: user.email,
+                        name: user.name,
+                        lastname: user.lastname,
+                        password: user.password,
+                        roleId: user.roleId,
+                        genderId: user.genderId,
+                        createdAt: new Date(user.createdAt),
+                        updatedAt: user.updatedAt
+                            ? new Date(user.updatedAt)
+                            : null,
+                    },
+                });
         }
 
         setTimeout(() => {
@@ -60,7 +74,20 @@ export const useAuth = () => {
             );
 
             if (data.data) {
-                setAuthStatus({ user: data.data.user });
+                setAuthStatus({
+                    user: {
+                        email: data.data.user.email,
+                        name: data.data.user.name,
+                        lastname: data.data.user.lastname,
+                        password: data.data.user.password,
+                        roleId: data.data.user.roleId,
+                        genderId: data.data.user.genderId,
+                        createdAt: new Date(data.data.user.createdAt),
+                        updatedAt: data.data.user.updatedAt
+                            ? new Date(data.data.user.updatedAt)
+                            : null,
+                    },
+                });
                 localStorage.setItem("authorization", data.data.token);
             }
             return {
