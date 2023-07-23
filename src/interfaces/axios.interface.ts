@@ -29,3 +29,16 @@ export type APIResGoogleAuth = APIRes<{
 export type APIResSignUp = APIRes<UserAuthInfo>;
 
 export type APIResGoogleSignIn = APIRes<firebaseConfig>;
+
+export type APIResGetRole = APIRes<{
+    id: number;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}>;
+export type APIResGetGender = APIRes<{
+    id: number;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}>;
