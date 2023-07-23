@@ -9,6 +9,8 @@ import {
     ResSignUp,
 } from "../interfaces/auth.interface";
 import {
+    APIResGetGender,
+    APIResGetRole,
     APIResGoogleAuth,
     APIResSessionLogin,
     APIResSignIn,
@@ -189,6 +191,29 @@ export const useAuth = () => {
         localStorage.removeItem("authorization");
     };
 
+    const GetRole = async (id: number) => {
+        try {
+            const { data }: APIResGetRole = await axios.get(
+                `${api}/role/${id}`
+            );
+            return data.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
+    const GetGender = async (id: number) => {
+        try {
+            const { data }: APIResGetGender = await axios.get(
+                `${api}/gender/${id}`
+            );
+            return data.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
+
     return {
         AuthStatus,
         AppLoading,
@@ -197,5 +222,7 @@ export const useAuth = () => {
         SignUp,
         GoogleAuth,
         LogOut,
+        GetRole,
+        GetGender,
     };
 };
