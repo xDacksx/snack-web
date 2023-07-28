@@ -46,6 +46,13 @@
                     background: #101727;
                     color: #fff;
                 }
+                &,
+                a {
+                    display: inline-block;
+                    color: #101727;
+                    text-align: center;
+                    text-decoration: none;
+                }
             }
         }
         .content {
