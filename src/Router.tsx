@@ -3,6 +3,7 @@ import { App } from "./App";
 import { HomePage } from "./pages/home.page";
 import { AuthPage } from "./pages/auth.page";
 import { AccountPage } from "./pages/account.page";
+import { AdminPage } from "./pages/admin.page";
 
 export const Router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/account",
                 element: <AccountPage />,
+            },
+            {
+                path: "/admin/dashboard",
+                element: <AdminPage />,
             },
         ],
     },
