@@ -21,8 +21,8 @@ export interface UserAuthInfo {
     name: string;
     lastname: string;
 
-    roleId: number;
-    genderId: number;
+    role: "client" | "admin" | "delivery";
+    gender: string;
 
     createdAt: Date;
     updatedAt: Date | null;

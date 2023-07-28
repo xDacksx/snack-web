@@ -9,10 +9,6 @@ import {
     ResSignUp,
 } from "../interfaces/auth.interface";
 import {
-    APIResGetAllGenders,
-    APIResGetAllRoles,
-    APIResGetGender,
-    APIResGetRole,
     APIResGoogleAuth,
     APIResSessionLogin,
     APIResSignIn,
@@ -55,8 +51,8 @@ export const useAuth = () => {
                         name: user.name,
                         lastname: user.lastname,
                         password: user.password,
-                        roleId: user.roleId,
-                        genderId: user.genderId,
+                        role: user.role,
+                        gender: user.gender,
                         createdAt: new Date(user.createdAt),
                         updatedAt: user.updatedAt
                             ? new Date(user.updatedAt)
@@ -84,8 +80,8 @@ export const useAuth = () => {
                         name: data.data.user.name,
                         lastname: data.data.user.lastname,
                         password: data.data.user.password,
-                        roleId: data.data.user.roleId,
-                        genderId: data.data.user.genderId,
+                        role: data.data.user.role,
+                        gender: data.data.user.gender,
                         createdAt: new Date(data.data.user.createdAt),
                         updatedAt: data.data.user.updatedAt
                             ? new Date(data.data.user.updatedAt)
@@ -193,50 +189,6 @@ export const useAuth = () => {
         localStorage.removeItem("authorization");
     };
 
-    const GetRole = async (id: number) => {
-        try {
-            const { data }: APIResGetRole = await axios.get(
-                `${api}/role/${id}`
-            );
-            return data.data;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
-    const GetGender = async (id: number) => {
-        try {
-            const { data }: APIResGetGender = await axios.get(
-                `${api}/gender/${id}`
-            );
-            return data.data;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
-
-    const GetAllRoles = async () => {
-        try {
-            const { data }: APIResGetAllRoles = await axios.get(`${api}/role/`);
-            return data;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
-    const GetAllGenders = async () => {
-        try {
-            const { data }: APIResGetAllGenders = await axios.get(
-                `${api}/gender/`
-            );
-            return data;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
-
     return {
         AuthStatus,
         AppLoading,
@@ -245,9 +197,5 @@ export const useAuth = () => {
         SignUp,
         GoogleAuth,
         LogOut,
-        GetRole,
-        GetGender,
-        GetAllRoles,
-        GetAllGenders,
     };
 };

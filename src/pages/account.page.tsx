@@ -4,6 +4,8 @@ import { Wall } from "../components/auth/wall-auth";
 import styles from "../scss/pages/account.module.scss";
 import { AccountInformation } from "../components/account-menu/information";
 import { AccountChangePassword } from "../components/account-menu/change-password";
+import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export const AccountPage: FC<Component> = (): ReactElement => {
     interface section {
@@ -43,6 +45,8 @@ export const AccountPage: FC<Component> = (): ReactElement => {
         setSections(newSections);
     }
 
+    const { AuthStatus } = useAuth();
+
     return (
         <Wall mode="need-auth">
             <div className={styles.accountPage}>
@@ -60,6 +64,14 @@ export const AccountPage: FC<Component> = (): ReactElement => {
                                 {e.name}
                             </button>
                         ))}
+                        {AuthStatus.user?.role === "admin" && (
+                            <Link
+                                to="/admin/dashboard"
+                                className={styles.button}
+                            >
+                                Admin dashboard
+                            </Link>
+                        )}
                     </div>
                     <div className={styles.content}>
                         {sections.map((e, i) => (

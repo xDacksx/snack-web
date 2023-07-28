@@ -14,6 +14,14 @@ export const Wall: FC<WallAttributes> = ({ children, mode }): ReactElement => {
         if (AuthStatus.user) return <Navigate to="/auth/sign-in" />;
         else return child;
     }
+
+    if (mode === "admin") {
+        if (AuthStatus.user) {
+            if (AuthStatus.user.role === "admin") return child;
+            else return <Navigate to="/" />;
+        } else return <Navigate to="/auth/sign-in" />;
+    }
+
     return child;
 };
 
@@ -21,5 +29,5 @@ type ComponentChildren = JSX.Element | JSX.Element[] | string | string[];
 
 interface WallAttributes {
     children: ComponentChildren;
-    mode?: "need-auth" | "no-auth-exclusive";
+    mode?: "need-auth" | "no-auth-exclusive" | "admin";
 }
