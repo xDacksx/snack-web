@@ -39,6 +39,7 @@
                 font-family: "Gelion";
                 font-weight: 300;
                 font-size: 1rem;
+                color: #000;
                 &:hover {
                     background: rgba($color: #101727, $alpha: 0.1);
                 }
@@ -46,10 +47,9 @@
                     background: #101727;
                     color: #fff;
                 }
-                &,
-                a {
+                & + a {
                     display: inline-block;
-                    color: #101727;
+                    color: #000;
                     text-align: center;
                     text-decoration: none;
                 }
@@ -63,6 +63,12 @@
                 h4 {
                     font-size: 1.25rem;
                     font-weight: 500;
+                }
+                p {
+                    text-transform: capitalize;
+                    &:nth-child(2) {
+                        text-transform: lowercase;
+                    }
                 }
             }
             .changePass {
