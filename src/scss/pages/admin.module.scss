@@ -1,0 +1,217 @@
+$color: #101727;
+
+.adminPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 1rem;
+
+    .container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        width: 80%;
+        height: clamp(90%, 95%, 99%);
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+
+        & > * {
+            color: #000;
+        }
+
+        .menu {
+            width: 30%;
+            height: 100%;
+            border-right: 1px solid $color;
+            .button {
+                width: 100%;
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid $color;
+                padding: 1rem 0;
+                cursor: pointer;
+                font-family: "Gelion";
+                font-weight: 300;
+                font-size: 1rem;
+                color: #000;
+                &:hover {
+                    background: rgba($color: $color, $alpha: 0.1);
+                }
+                &.selected {
+                    background: $color;
+                    color: #fff;
+                }
+                & + a {
+                    display: inline-block;
+                    color: #000;
+                    text-align: center;
+                    text-decoration: none;
+                }
+            }
+        }
+        .content {
+            width: 70%;
+            height: 100%;
+            position: relative;
+            .edit {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                padding: 1rem;
+                gap: 1rem;
+                .item {
+                    border: none;
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: center;
+                    align-items: center;
+
+                    position: relative;
+                    width: 4rem;
+                    height: 4rem;
+                    background: #eee;
+                    border-radius: 6px;
+                    padding: 0.5rem;
+                    cursor: pointer;
+                    svg {
+                        width: 90%;
+                        height: 90%;
+                        pointer-events: none;
+                    }
+                    &:hover {
+                        background: $color;
+                        color: #fff;
+                        p {
+                            display: inline-block;
+                        }
+                    }
+                    p {
+                        position: absolute;
+                        bottom: -1.5rem;
+                        background: #eee;
+                        width: 100%;
+                        text-align: center;
+                        border-radius: 6px;
+                        color: #000;
+                        display: none;
+                    }
+                }
+                .addBtn {
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: center;
+                    align-items: center;
+
+                    position: relative;
+                    width: 4rem;
+                    height: 4rem;
+
+                    border: 0.25rem solid $color;
+                    background: transparent;
+
+                    border-radius: 6px;
+                    padding: 0.5rem;
+                    cursor: pointer;
+                    svg {
+                        width: auto;
+                        height: 100%;
+                        pointer-events: none;
+                    }
+                }
+            }
+            .add {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 100%;
+                height: 100%;
+
+                padding: 2rem;
+                gap: 1rem;
+
+                background: white;
+
+                left: 0;
+                top: 0;
+                position: absolute;
+
+                input {
+                    width: 100%;
+                    padding: 0.5rem 0rem;
+
+                    border: none;
+                    border-bottom: 1px solid rgba($color: $color, $alpha: 0.5);
+                    background: transparent;
+
+                    transition: 0.25s ease border;
+
+                    &:focus {
+                        outline: none;
+                        border-bottom: 1px solid $color;
+                    }
+                }
+                textarea {
+                    width: 100%;
+                    height: 2rem;
+
+                    resize: none;
+                    padding: 0.5rem 0rem;
+                    border: none;
+                    border-bottom: 1px solid rgba($color: $color, $alpha: 0.5);
+                    background: transparent;
+
+                    &:focus {
+                        outline: none;
+                        border-bottom: 1px solid $color;
+                    }
+                }
+                .btn {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0.3rem 0.25rem;
+                    gap: 0.5rem;
+
+                    background: transparent;
+                    width: 100%;
+                    height: 2rem;
+
+                    color: #101727;
+                    font-weight: 400;
+                    font-family: "Gelion";
+
+                    border: 1px solid #101727;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    img {
+                        width: auto;
+                        height: 100%;
+                    }
+                    transition: 0.25s ease background, 0.25s ease color;
+                    &:hover {
+                        background: #101727;
+                        color: white;
+                    }
+
+                    &.float {
+                        position: absolute;
+                        bottom: 2rem;
+                        width: calc(100% - 4rem);
+                    }
+                }
+            }
+        }
+    }
+}
