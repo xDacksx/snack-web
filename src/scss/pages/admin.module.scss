@@ -1,4 +1,4 @@
-$color: #101727;
+@use "../colours" as *;
 
 .adminPage {
     width: 100%;
@@ -30,12 +30,12 @@ $color: #101727;
         .menu {
             width: 30%;
             height: 100%;
-            border-right: 1px solid $color;
+            border-right: 1px solid $c_gray;
             .button {
                 width: 100%;
                 background: transparent;
                 border: none;
-                border-bottom: 1px solid $color;
+                border-bottom: 1px solid $c_gray;
                 padding: 1rem 0;
                 cursor: pointer;
                 font-family: "Gelion";
@@ -43,10 +43,10 @@ $color: #101727;
                 font-size: 1rem;
                 color: #000;
                 &:hover {
-                    background: rgba($color: $color, $alpha: 0.1);
+                    background: rgba($color: $c_gray, $alpha: 0.1);
                 }
                 &.selected {
-                    background: $color;
+                    background: $c_gray;
                     color: #fff;
                 }
                 & + a {
@@ -89,7 +89,7 @@ $color: #101727;
                         pointer-events: none;
                     }
                     &:hover {
-                        background: $color;
+                        background: $c_gray;
                         color: #fff;
                         p {
                             display: inline-block;
@@ -116,7 +116,7 @@ $color: #101727;
                     width: 4rem;
                     height: 4rem;
 
-                    border: 0.25rem solid $color;
+                    border: 0.25rem solid $c_gray;
                     background: transparent;
 
                     border-radius: 6px;
@@ -151,14 +151,14 @@ $color: #101727;
                     padding: 0.5rem 0rem;
 
                     border: none;
-                    border-bottom: 1px solid rgba($color: $color, $alpha: 0.5);
+                    border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
                     background: transparent;
 
                     transition: 0.25s ease border;
 
                     &:focus {
                         outline: none;
-                        border-bottom: 1px solid $color;
+                        border-bottom: 1px solid $c_gray;
                     }
                 }
                 textarea {
@@ -168,12 +168,12 @@ $color: #101727;
                     resize: none;
                     padding: 0.5rem 0rem;
                     border: none;
-                    border-bottom: 1px solid rgba($color: $color, $alpha: 0.5);
+                    border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
                     background: transparent;
 
                     &:focus {
                         outline: none;
-                        border-bottom: 1px solid $color;
+                        border-bottom: 1px solid $c_gray;
                     }
                 }
                 .btn {
@@ -188,11 +188,11 @@ $color: #101727;
                     width: 100%;
                     height: 2rem;
 
-                    color: #101727;
+                    color: $c_gray;
                     font-weight: 400;
                     font-family: "Gelion";
 
-                    border: 1px solid #101727;
+                    border: 1px solid $c_gray;
                     border-radius: 6px;
                     cursor: pointer;
                     img {
@@ -201,14 +201,21 @@ $color: #101727;
                     }
                     transition: 0.25s ease background, 0.25s ease color;
                     &:hover {
-                        background: #101727;
+                        background: $c_gray;
                         color: white;
                     }
-
-                    &.float {
-                        position: absolute;
-                        bottom: 2rem;
-                        width: calc(100% - 4rem);
+                }
+                .float {
+                    position: absolute;
+                    bottom: 2rem;
+                    width: calc(100% - 4rem);
+                    .message {
+                        display: inline-block;
+                        width: 100%;
+                        padding: 0.5rem 1rem;
+                        background: red;
+                        margin-bottom: 1rem;
+                        border-radius: 6px;
                     }
                 }
             }

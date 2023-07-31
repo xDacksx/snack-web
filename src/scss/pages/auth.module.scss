@@ -32,7 +32,7 @@
             height: 100%;
             padding: 2rem;
             gap: 1rem;
-            color: #101727;
+            color: $c_gray;
 
             h2 {
                 width: 100%;
@@ -50,7 +50,7 @@
                     display: inline-block;
                     width: 100%;
                     height: 1px;
-                    background: #101727;
+                    background: $c_gray;
                     position: absolute;
                     left: 0;
                     top: 50%;
@@ -76,9 +76,9 @@
                 display: inline-flex;
                 gap: 0.5rem;
                 width: 100%;
-                color: rgba($color: #101727, $alpha: 0.75);
+                color: rgba($color: $c_gray, $alpha: 0.75);
                 a {
-                    color: #101727;
+                    color: $c_gray;
                     text-decoration: none;
                 }
             }
@@ -88,14 +88,14 @@
                 padding: 0.5rem 0rem;
 
                 border: none;
-                border-bottom: 1px solid rgba($color: #101727, $alpha: 0.5);
+                border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
                 background: transparent;
 
                 transition: 0.25s ease border;
 
                 &:focus {
                     outline: none;
-                    border-bottom: 1px solid #101727;
+                    border-bottom: 1px solid $c_gray;
                 }
             }
             .btn {
@@ -110,11 +110,11 @@
                 width: 100%;
                 height: 2rem;
 
-                color: #101727;
+                color: $c_gray;
                 font-weight: 400;
                 font-family: "Gelion";
 
-                border: 1px solid #101727;
+                border: 1px solid $c_gray;
                 border-radius: 6px;
                 cursor: pointer;
                 img {
@@ -123,7 +123,7 @@
                 }
                 transition: 0.25s ease background, 0.25s ease color;
                 &:hover {
-                    background: #101727;
+                    background: $c_gray;
                     color: white;
                 }
             }

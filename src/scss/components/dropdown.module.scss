@@ -1,7 +1,9 @@
+@use "../colours" as *;
+
 .container {
     position: relative;
     width: 100%;
-    border: 1px solid #101727;
+    border: 1px solid $c_gray;
     border-radius: 6px;
     height: 2rem;
     display: flex;
@@ -20,7 +22,7 @@
 
 .clear-btn {
     background: none;
-    color: #101727;
+    color: $c_gray;
     border: none;
     outline: none;
     cursor: pointer;
@@ -34,7 +36,7 @@
 }
 
 .divider {
-    background-color: #101727;
+    background-color: $c_gray;
     align-self: stretch;
     width: 0.05em;
 }
@@ -42,7 +44,7 @@
 .caret {
     translate: 0 25%;
     border: 0.25em solid transparent;
-    border-top-color: #101727;
+    border-top-color: $c_gray;
 }
 
 .options {
@@ -53,7 +55,7 @@
     display: none;
     max-height: 15em;
     overflow-y: auto;
-    border: 0.05em solid #101727;
+    border: 0.05em solid $c_gray;
     border-radius: 0.25em;
     width: 100%;
     left: 0;
@@ -72,12 +74,12 @@
 }
 
 .option.selected {
-    background-color: #101727;
+    background-color: $c_gray;
     color: white;
 }
 
 .option.highlighted {
-    background-color: #101727;
+    background-color: $c_gray;
     color: white;
 }
 
