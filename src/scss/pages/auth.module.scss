@@ -147,12 +147,12 @@
                     font-weight: 500;
                 }
                 &.green {
-                    background: #abff4f;
-                    border-color: #29bf12;
+                    background: $c_green_light;
+                    border-color: $c_green;
                 }
                 &.red {
-                    background: #ef233c;
-                    border-color: #d90429;
+                    background: $c_red_light;
+                    border-color: $c_red;
                     color: white;
                 }
                 h2 {
