@@ -5,8 +5,10 @@
     "type": "module",
     "main": "public/electron.cjs",
     "scripts": {
-        "dev": "concurrently --kill-others \"vite --host\" \"electron .\"",
+        "dev": "vite --host",
+        "electron": "electron .",
         "build": "tsc && vite build",
+        "multi": "concurrently --kill-others \"vite --host\" \"electron .\"",
         "preview": "vite preview"
     },
     "dependencies": {
