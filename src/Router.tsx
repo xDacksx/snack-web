@@ -4,6 +4,7 @@ import { HomePage } from "./pages/home.page";
 import { AuthPage } from "./pages/auth.page";
 import { AccountPage } from "./pages/account.page";
 import { AdminPage } from "./pages/admin.page";
+import { MenuList } from "./components/admin/menu-items/menu-list";
 
 export const Router = createBrowserRouter([
     {
@@ -31,8 +32,18 @@ export const Router = createBrowserRouter([
                 element: <AccountPage />,
             },
             {
-                path: "/admin/dashboard",
+                path: "/admin/dashboard/",
                 element: <AdminPage />,
+                children: [
+                    {
+                        path: "menu",
+                        element: <MenuList />,
+                    },
+                    {
+                        path: "delivery-management",
+                        element: <MenuList />,
+                    },
+                ],
             },
         ],
     },
