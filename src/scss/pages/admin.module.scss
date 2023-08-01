@@ -171,6 +171,8 @@
                     border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
                     background: transparent;
 
+                    max-height: 60%;
+
                     &:focus {
                         outline: none;
                         border-bottom: 1px solid $c_gray;
@@ -210,12 +212,30 @@
                     bottom: 2rem;
                     width: calc(100% - 4rem);
                     .message {
-                        display: inline-block;
+                        display: flex;
+                        flex-flow: column nowrap;
                         width: 100%;
-                        padding: 0.5rem 1rem;
-                        background: red;
+                        padding: 0.5rem 1.5rem;
                         margin-bottom: 1rem;
                         border-radius: 6px;
+
+                        background: #bbd0ff;
+                        border: 1px solid #00a6fb;
+                        width: 100%;
+                        font-size: 0.9rem;
+
+                        h4 {
+                            font-weight: 500;
+                        }
+                        &.green {
+                            background: $c_green_light;
+                            border-color: $c_green;
+                        }
+                        &.red {
+                            background: $c_red_light;
+                            border-color: $c_red;
+                            color: white;
+                        }
                     }
                 }
             }

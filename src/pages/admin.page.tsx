@@ -2,7 +2,7 @@ import { FC, Fragment, ReactElement, useState } from "react";
 import { Component } from "../interfaces/react_element";
 import { Wall } from "../components/auth/wall-auth";
 import styles from "../scss/pages/admin.module.scss";
-import { EditMenu } from "../components/admin/edit-menu";
+import { MenuList } from "../components/admin/menu-items/menu-list";
 
 export const AdminPage: FC<Component> = ({}): ReactElement => {
     interface section {
@@ -15,7 +15,7 @@ export const AdminPage: FC<Component> = ({}): ReactElement => {
         {
             id: 1,
             name: "Edit menu items",
-            component: <EditMenu />,
+            component: <MenuList />,
             selected: true,
         },
         {
