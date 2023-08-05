@@ -8,7 +8,5 @@ export interface MenuItem {
 }
 
 export interface MenuFormAttributes {
-    setItems: (value: MenuItem[]) => void;
-    Items: MenuItem[];
-    setAddMode: (value: boolean) => void;
+    mode: "edit" | "new";
 }

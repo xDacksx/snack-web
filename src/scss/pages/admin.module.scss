@@ -32,6 +32,11 @@
             height: 100%;
             border-right: 1px solid $c_gray;
             .button {
+                display: inline-block;
+
+                text-align: center;
+                text-decoration: none;
+
                 width: 100%;
                 background: transparent;
                 border: none;
@@ -48,12 +53,6 @@
                 &.selected {
                     background: $c_gray;
                     color: #fff;
-                }
-                & + a {
-                    display: inline-block;
-                    color: #000;
-                    text-align: center;
-                    text-decoration: none;
                 }
             }
         }
@@ -75,6 +74,8 @@
                     flex-flow: column wrap;
                     justify-content: center;
                     align-items: center;
+
+                    color: $c-gray;
 
                     position: relative;
                     width: 4rem;

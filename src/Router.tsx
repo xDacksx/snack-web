@@ -5,6 +5,7 @@ import { AuthPage } from "./pages/auth.page";
 import { AccountPage } from "./pages/account.page";
 import { AdminPage } from "./pages/admin.page";
 import { MenuList } from "./components/admin/menu-items/menu-list";
+import { MenuForm } from "./components/admin/menu-items/menu-form";
 
 export const Router = createBrowserRouter([
     {
@@ -40,7 +41,15 @@ export const Router = createBrowserRouter([
                         element: <MenuList />,
                     },
                     {
-                        path: "delivery-management",
+                        path: "menu/new",
+                        element: <MenuForm />,
+                    },
+                    {
+                        path: "menu/item/:itemId",
+                        element: <MenuForm />,
+                    },
+                    {
+                        path: "delivery",
                         element: <MenuList />,
                     },
                 ],

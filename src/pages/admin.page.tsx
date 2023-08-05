@@ -10,11 +10,8 @@ export const AdminPage: FC<Component> = ({}): ReactElement => {
             <div className={styles.adminPage}>
                 <div className={styles.container}>
                     <div className={styles.menu}>
-                        <Link to="menu" text="Edit menu items" />
-                        <Link
-                            to="delivery-management"
-                            text="Delivery management"
-                        />
+                        <Link to="menu" text="Menu management" />
+                        <Link to="delivery" text="Delivery management" />
                     </div>
                     <div className={styles.content}>
                         <Outlet />

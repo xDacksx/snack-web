@@ -5,12 +5,15 @@ import "./scss/index.scss";
 import React from "react";
 import { AuthProvider } from "./context/auth.context.tsx";
 import { NavProvider } from "./context/nav.context.tsx";
+import { MenuProvider } from "./context/menu.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("snack") as HTMLElement).render(
     <React.StrictMode>
         <AuthProvider>
             <NavProvider>
-                <RouterProvider router={Router} />
+                <MenuProvider>
+                    <RouterProvider router={Router} />
+                </MenuProvider>
             </NavProvider>
         </AuthProvider>
     </React.StrictMode>

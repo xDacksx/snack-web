@@ -1,18 +1,32 @@
-import { FC, ReactElement, useState, FormEvent } from "react";
+import { FC, ReactElement, useState, FormEvent, useContext } from "react";
 import styles from "../../../scss/pages/admin.module.scss";
 import TextareaAutosize from "react-textarea-autosize";
-import { MenuFormAttributes } from "../../../interfaces/menu-components.interface";
+import { MenuContext, MenuItemsType } from "../../../context/menu.context";
+import { useNavigate, useParams } from "react-router-dom";
+import { MenuItem } from "../../../interfaces/menu-components.interface";
 
-export const MenuForm: FC<MenuFormAttributes> = ({
-    setItems,
-    Items,
-    setAddMode,
-}): ReactElement => {
+export const MenuForm: FC = ({}): ReactElement => {
+    const { MenuItems, setMenuItems } = useContext(
+        MenuContext
+    ) as MenuItemsType;
+
     const [errors, setErrors] = useState<string[]>([]);
-    const [itemName, setItemName] = useState("");
-    const [itemDesc, setItemDesc] = useState("");
 
-    async function AddItem(e: FormEvent) {
+    const Navigate = useNavigate();
+
+    const { itemId } = useParams();
+    const currentItem = itemId
+        ? MenuItems.filter((item) => item.id === parseInt(itemId))[0]
+        : null;
+
+    const [itemName, setItemName] = useState(
+        currentItem ? currentItem.name : ""
+    );
+    const [itemDesc, setItemDesc] = useState(
+        currentItem ? currentItem.description : ""
+    );
+
+    async function Submit(e: FormEvent) {
         e.preventDefault();
 
         setErrors([]);
@@ -24,7 +38,7 @@ export const MenuForm: FC<MenuFormAttributes> = ({
         if (errs.length > 0) return setErrors(errs);
 
         const item = {
-            id: Items.length + 1,
+            id: MenuItems.length + 1,
             name: itemName,
             description: itemDesc,
             available: true,
@@ -32,21 +46,27 @@ export const MenuForm: FC<MenuFormAttributes> = ({
             updatedAt: new Date(),
         };
 
-        const newItems = [...Items, item];
+        let newItems: MenuItem[] = [];
 
+        if (!itemId) {
+            newItems = [...MenuItems, item];
+        } else {
+            item.id = parseInt(itemId);
+            const filteredItems = MenuItems.filter(
+                (item) => item.id !== parseInt(itemId)
+            );
+            newItems = [...filteredItems, item];
+        }
         newItems.sort((a, b) => a.id - b.id);
 
         localStorage.setItem("menu-items", JSON.stringify(newItems));
+        setMenuItems(newItems);
 
-        setItems(newItems);
-
-        setItemName("");
-        setItemDesc("");
-        setAddMode(false);
+        Navigate("/admin/dashboard/menu");
     }
 
     return (
-        <form className={styles.add} onSubmit={AddItem}>
+        <form className={styles.add} onSubmit={Submit}>
             <input
                 type="text"
                 placeholder="name"
@@ -74,7 +94,7 @@ export const MenuForm: FC<MenuFormAttributes> = ({
                 <button
                     className={styles.btn}
                     type="button"
-                    onClick={() => setAddMode(false)}
+                    onClick={() => Navigate("/admin/dashboard/menu")}
                 >
                     Back
                 </button>
