@@ -43,8 +43,8 @@ export const useMenu = () => {
         try {
             const Form = new FormData();
 
-            if (product.available)
-                Form.append("available", product.available ? "true" : "false");
+            Form.append("available", product.available ? "true" : "false");
+
             if (product.name) Form.append("name", product.name);
             if (product.description)
                 Form.append("description", product.description);

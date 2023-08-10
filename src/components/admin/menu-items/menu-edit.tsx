@@ -44,6 +44,8 @@ export const MenuEdit: FC = ({}): ReactElement => {
         async (data) => {
             setErrors([]);
             if (itemId) {
+                data.available = dropdown.value === "true" ? true : false;
+
                 await editProduct(data, parseInt(itemId));
 
                 reset();
