@@ -1,7 +1,6 @@
 import { FC, Fragment, ReactElement } from "react";
 import { Component } from "../../interfaces/react_element";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-7;
 
 export const Map: FC<Component> = ({}): ReactElement => {
     const env = import.meta.env;
