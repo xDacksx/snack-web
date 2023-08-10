@@ -1,6 +1,7 @@
 @use "../colours" as *;
 .menu {
     background: $c_primary;
+    height: 16rem;
     width: 100%;
     padding: 2rem;
 
@@ -134,5 +135,11 @@
                 }
             }
         }
+    }
+    .empty {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        align-self: center;
     }
 }
