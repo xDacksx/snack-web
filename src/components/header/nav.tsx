@@ -7,8 +7,8 @@ export const Nav: FC<Component> = ({}): ReactElement => {
     return (
         <nav className={style.nav}>
             <Link to="/">Home</Link>
-            <Link to="/">Menu</Link>
-            <Link to="/">Info</Link>
+            <a href="#menu">Menu</a>
+            <a href="#information">Info</a>
         </nav>
     );
 };

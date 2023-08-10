@@ -10,7 +10,7 @@ export const Menu: FC<Component> = ({}): ReactElement => {
     const isEmpty = MenuItems.filter((item) => item.available).length < 1;
 
     return (
-        <div className={styles.menu}>
+        <div id="menu" className={styles.menu}>
             {MenuItems.map(
                 (product) =>
                     product.available && (
