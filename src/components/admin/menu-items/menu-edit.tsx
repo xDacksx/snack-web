@@ -157,6 +157,7 @@ export const MenuEdit: FC = ({}): ReactElement => {
                     {...registerImg("image", {
                         required: true,
                     })}
+                    accept="image/*"
                 />
                 <div className={styles.btn_line}>
                     <button className={styles.btn} type="submit">

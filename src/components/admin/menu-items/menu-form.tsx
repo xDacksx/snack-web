@@ -87,6 +87,7 @@ export const MenuForm: FC = ({}): ReactElement => {
                 {...register("image", {
                     required: true,
                 })}
+                accept="image/*"
             />
 
             <Select
