@@ -7,6 +7,7 @@ import { AdminPage } from "./pages/admin.page";
 import { MenuList } from "./components/admin/menu-items/menu-list";
 import { MenuForm } from "./components/admin/menu-items/menu-form";
 import { MenuEdit } from "./components/admin/menu-items/menu-edit";
+import { DeliveryList } from "./components/admin/delivery/delivery-list";
 
 export const Router = createBrowserRouter([
     {
@@ -51,7 +52,7 @@ export const Router = createBrowserRouter([
                     },
                     {
                         path: "delivery",
-                        element: <MenuList />,
+                        element: <DeliveryList />,
                     },
                 ],
             },
