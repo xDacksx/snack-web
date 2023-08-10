@@ -10,6 +10,8 @@ export const MenuItem: FC<MenuItem> = ({
     stars,
 }): ReactElement => {
     stars = Math.round(stars);
+    const ogTitle = title;
+    const ogDesc = description;
 
     if (stars < 0) stars = 0;
     if (stars > 5) stars = 5;
@@ -20,17 +22,21 @@ export const MenuItem: FC<MenuItem> = ({
     if (description.length > 125)
         description = description.slice(0, 124) + "...";
 
+    if (title.length > 23) title = title.slice(0, 22) + "...";
+
     return (
         <div className={styles.item}>
             <div className={styles.image}>
                 <img src={image} alt={title} />
             </div>
             <div className={styles.info}>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <div className={styles.text}>
+                    <h3 title={ogTitle}>{title}</h3>
+                    <p title={ogDesc}>{description}</p>
+                </div>
                 <span className={styles.quality}>
                     <span className={styles.price}>
-                        <span className={styles.ball} /> ${price}
+                        <span className={styles.ball} /> ${price.toFixed(2)}
                     </span>
                     <span className={styles.stars}>
                         {stars_.map((_e, i) => (
