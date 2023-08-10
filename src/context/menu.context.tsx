@@ -1,37 +1,28 @@
-import { FC, createContext, useState } from "react";
+import { FC, createContext, useState, useEffect } from "react";
 import { ReactElement } from "../interfaces/react_element";
 import { MenuItem } from "../interfaces/menu-components.interface";
+import axios from "axios";
+
+const env = import.meta.env;
+const api = env.VITE_SERVER_URL;
 
 export const MenuContext = createContext<MenuItemsType | null>(null);
 
 export const MenuProvider: FC<ReactElement> = ({ children }): JSX.Element => {
-    function GetItems() {
-        const data = localStorage.getItem("menu-items");
+    async function GetItems() {
+        const { data } = await axios.get(`${api}/product`);
 
-        if (!data) {
-            localStorage.setItem(
-                "menu-items",
-                JSON.stringify([newItem(1), newItem(2)])
-            );
-            return [newItem(1), newItem(2)];
+        if (data && data.data) {
+            const products: MenuItem[] = data.data;
+            setMenuItems(products);
         }
-        const items: MenuItem[] = JSON.parse(data);
-        return items;
     }
 
-    function newItem(id: number): MenuItem {
-        const item: MenuItem = {
-            id: id,
-            name: "Item",
-            description: "Lorem",
-            available: true,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        };
-        return item;
-    }
+    useEffect(() => {
+        GetItems();
+    }, []);
 
-    const [MenuItems, setMenuItems] = useState<MenuItem[]>(GetItems());
+    const [MenuItems, setMenuItems] = useState<MenuItem[]>([]);
 
     return (
         <MenuContext.Provider
