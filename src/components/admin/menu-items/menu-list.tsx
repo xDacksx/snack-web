@@ -2,7 +2,7 @@ import { FC, Fragment, ReactElement, useEffect } from "react";
 import { Component } from "../../../interfaces/react_element";
 import { PiHamburgerBold } from "react-icons/pi";
 import { GrFormAdd } from "react-icons/gr";
-import styles from "../../../scss/pages/admin.module.scss";
+import styles from "../../../scss/components/admin/menu.module.scss";
 import { Link } from "react-router-dom";
 import { useMenu } from "../../../hooks/useMenu";
 

@@ -1,0 +1,324 @@
+@use "../../colours" as *;
+
+.list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 1rem;
+    gap: 1rem;
+    .item {
+        border: none;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+
+        color: $c-gray;
+
+        position: relative;
+        width: 4rem;
+        height: 4rem;
+        background: #eee;
+        border-radius: 6px;
+        padding: 0.5rem;
+        cursor: pointer;
+        svg {
+            width: 90%;
+            height: 90%;
+            pointer-events: none;
+        }
+        &:hover {
+            background: $c_gray;
+            color: #fff;
+            p {
+                display: inline-block;
+            }
+        }
+        p {
+            display: none;
+            padding: 0 5px;
+            min-width: 100%;
+            max-width: 10rem;
+
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            border-radius: 6px;
+
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+            background: #eee;
+            text-align: justify;
+            color: #000;
+
+            z-index: 2;
+            overflow: hidden;
+        }
+    }
+    .addBtn {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+        width: 4rem;
+        height: 4rem;
+
+        border: 0.25rem solid $c_gray;
+        background: transparent;
+
+        border-radius: 6px;
+        padding: 0.5rem;
+        cursor: pointer;
+        svg {
+            width: auto;
+            height: 100%;
+            pointer-events: none;
+        }
+    }
+}
+.add {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+
+    padding: 2rem;
+    gap: 1rem;
+
+    background: white;
+
+    left: 0;
+    top: 0;
+    position: absolute;
+
+    input {
+        width: 100%;
+        padding: 0.5rem 0rem;
+
+        border: none;
+        border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
+        background: transparent;
+
+        transition: 0.25s ease border;
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $c_gray;
+        }
+    }
+    textarea {
+        width: 100%;
+        height: 2rem;
+
+        resize: none;
+        padding: 0.5rem 0rem;
+        border: none;
+        border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
+        background: transparent;
+
+        max-height: 60%;
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $c_gray;
+        }
+    }
+    .btn {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0.3rem 0.25rem;
+        gap: 0.5rem;
+
+        background: transparent;
+        width: 100%;
+        height: 2rem;
+
+        color: $c_gray;
+        font-weight: 400;
+        font-family: "Gelion";
+
+        border: 1px solid $c_gray;
+        border-radius: 6px;
+        cursor: pointer;
+        img {
+            width: auto;
+            height: 100%;
+        }
+        transition: 0.25s ease background, 0.25s ease color;
+        &:hover {
+            background: $c_gray;
+            color: white;
+        }
+    }
+    .float {
+        position: absolute;
+        bottom: 2rem;
+        width: calc(100% - 4rem);
+        .message {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 100%;
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+
+            background: #bbd0ff;
+            border: 1px solid #00a6fb;
+            width: 100%;
+            font-size: 0.9rem;
+
+            h4 {
+                font-weight: 500;
+            }
+            &.green {
+                background: $c_green_light;
+                border-color: $c_green;
+            }
+            &.red {
+                background: $c_red_light;
+                border-color: $c_red;
+                color: white;
+            }
+        }
+    }
+}
+.edit {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+
+    padding: 2rem;
+    padding-bottom: 6rem;
+    gap: 1rem;
+
+    .form,
+    .img {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 2rem;
+        gap: 1rem;
+        .btn_line {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            button {
+                width: calc(50% - 0.5rem);
+            }
+        }
+    }
+
+    background: white;
+
+    left: 0;
+    top: 0;
+    position: absolute;
+
+    input {
+        width: 100%;
+        padding: 0.5rem 0rem;
+
+        border: none;
+        border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
+        background: transparent;
+
+        transition: 0.25s ease border;
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $c_gray;
+        }
+    }
+    textarea {
+        width: 100%;
+        height: 2rem;
+
+        resize: none;
+        padding: 0.5rem 0rem;
+        border: none;
+        border-bottom: 1px solid rgba($color: $c_gray, $alpha: 0.5);
+        background: transparent;
+
+        max-height: 60%;
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $c_gray;
+        }
+    }
+    .btn {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0.3rem 0.25rem;
+        gap: 0.5rem;
+
+        background: transparent;
+        width: 100%;
+        height: 2rem;
+
+        color: $c_gray;
+        font-weight: 400;
+        font-family: "Gelion";
+
+        border: 1px solid $c_gray;
+        border-radius: 6px;
+        cursor: pointer;
+        img {
+            width: auto;
+            height: 100%;
+        }
+        transition: 0.25s ease background, 0.25s ease color;
+        &:hover {
+            background: $c_gray;
+            color: white;
+        }
+    }
+    .float {
+        position: absolute;
+        bottom: 2rem;
+        width: calc(100% - 4rem);
+        .message {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 100%;
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+
+            background: #bbd0ff;
+            border: 1px solid #00a6fb;
+            width: 100%;
+            font-size: 0.9rem;
+
+            h4 {
+                font-weight: 500;
+            }
+            &.green {
+                background: $c_green_light;
+                border-color: $c_green;
+            }
+            &.red {
+                background: $c_red_light;
+                border-color: $c_red;
+                color: white;
+            }
+        }
+    }
+}

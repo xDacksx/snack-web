@@ -1,5 +1,5 @@
 import { FC, ReactElement, useState } from "react";
-import styles from "../../../scss/pages/admin.module.scss";
+import styles from "../../../scss/components/admin/menu.module.scss";
 import TextareaAutosize from "react-textarea-autosize";
 import { useNavigate, useParams } from "react-router-dom";
 import {
