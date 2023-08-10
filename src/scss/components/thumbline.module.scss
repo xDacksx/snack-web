@@ -80,3 +80,37 @@
         align-items: flex-start;
     }
 }
+
+@media (max-width: 394px) {
+    .thumbline {
+        flex-flow: column nowrap;
+        height: calc(100vh - 3.5rem);
+        padding: 2rem;
+        .first,
+        .second {
+            height: 50%;
+            width: 100%;
+            h3 {
+                text-align: left;
+                font-size: 8vw;
+            }
+            h2 {
+                font-size: 13vw;
+                text-align: left;
+                overflow-wrap: break-word;
+            }
+            p {
+                display: none;
+            }
+            .button {
+                font-size: 7vw;
+                padding: 5vw;
+                margin: 0 auto;
+            }
+        }
+        .first {
+            padding: 0;
+            justify-content: space-between;
+        }
+    }
+}

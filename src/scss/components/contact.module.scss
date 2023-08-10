@@ -61,3 +61,24 @@
         }
     }
 }
+@media (max-width: 799px) {
+    .contactInfo {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+
+        width: 100%;
+        height: fit-content;
+        padding: 2rem;
+        .social {
+            width: 100%;
+            gap: 2rem;
+        }
+        .map {
+            height: 50vh;
+            width: 100%;
+        }
+    }
+}
