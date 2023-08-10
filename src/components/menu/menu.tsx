@@ -9,16 +9,19 @@ export const Menu: FC<Component> = ({}): ReactElement => {
 
     return (
         <div className={styles.menu}>
-            {MenuItems.map((product) => (
-                <MenuItem
-                    image={product.imageUrl}
-                    title={product.name}
-                    description={product.description}
-                    price={product.price}
-                    stars={4.5}
-                    key={product.id}
-                />
-            ))}
+            {MenuItems.map(
+                (product) =>
+                    product.available && (
+                        <MenuItem
+                            image={product.imageUrl}
+                            title={product.name}
+                            description={product.description}
+                            price={product.price}
+                            stars={4.5}
+                            key={product.id}
+                        />
+                    )
+            )}
         </div>
     );
 };
