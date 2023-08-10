@@ -11,6 +11,7 @@
     gap: 0.5em;
     padding: 0.5em;
     outline: none;
+    cursor: pointer;
 }
 
 .value {
@@ -71,11 +72,6 @@
 .option {
     padding: 0.25em 0.5em;
     cursor: pointer;
-}
-
-.option.selected {
-    background-color: $c_gray;
-    color: white;
 }
 
 .option.highlighted {
