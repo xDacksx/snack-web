@@ -1,84 +1,102 @@
-import { FC, ReactElement, useState, FormEvent, useContext } from "react";
+import { FC, ReactElement, useState } from "react";
 import styles from "../../../scss/pages/admin.module.scss";
 import TextareaAutosize from "react-textarea-autosize";
-import { MenuContext, MenuItemsType } from "../../../context/menu.context";
-import { useNavigate, useParams } from "react-router-dom";
-import { MenuItem } from "../../../interfaces/menu-components.interface";
+import { useNavigate } from "react-router-dom";
+import { MenuItemForm } from "../../../interfaces/menu-components.interface";
+import { FieldError, useForm } from "react-hook-form";
+import { useMenu } from "../../../hooks/useMenu";
+import { Select, SelectOption } from "../../dropdown/dropdown";
 
 export const MenuForm: FC = ({}): ReactElement => {
-    const { MenuItems, setMenuItems } = useContext(
-        MenuContext
-    ) as MenuItemsType;
+    const { addProduct } = useMenu();
+
+    const { register, handleSubmit, reset } = useForm<MenuItemForm>();
 
     const [errors, setErrors] = useState<string[]>([]);
 
+    const options = [
+        { label: "Available", value: "true" },
+        { label: "Unavailable", value: "false" },
+    ];
+    const [dropdown, setDropdown] = useState<SelectOption>(options[0]);
+
     const Navigate = useNavigate();
 
-    const { itemId } = useParams();
-    const currentItem = itemId
-        ? MenuItems.filter((item) => item.id === parseInt(itemId))[0]
-        : null;
+    const Submit = handleSubmit(
+        async (data) => {
+            setErrors([]);
+            data.available = dropdown.value === "true" ? true : false;
+            await addProduct(data);
 
-    const [itemName, setItemName] = useState(
-        currentItem ? currentItem.name : ""
-    );
-    const [itemDesc, setItemDesc] = useState(
-        currentItem ? currentItem.description : ""
-    );
+            reset();
+        },
+        (e) => {
+            const errs: FieldError[] = [];
 
-    async function Submit(e: FormEvent) {
-        e.preventDefault();
+            for (const err in e) {
+                //@ts-ignore
+                const element = e[err];
+                errs.push(element);
+            }
 
-        setErrors([]);
-        const errs: string[] = [];
+            const errorsState: string[] = [];
 
-        if (!itemName.trim()) errs.push("Name can not be empty!");
-        if (!itemDesc.trim()) errs.push("Description can not be empty!");
+            errs.forEach((err) => {
+                if (err.type === "required" && err.ref)
+                    errorsState.push(`${err.ref.name} field is required!`);
+            });
 
-        if (errs.length > 0) return setErrors(errs);
-
-        const item = {
-            id: MenuItems.length + 1,
-            name: itemName,
-            description: itemDesc,
-            available: true,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        };
-
-        let newItems: MenuItem[] = [];
-
-        if (!itemId) {
-            newItems = [...MenuItems, item];
-        } else {
-            item.id = parseInt(itemId);
-            const filteredItems = MenuItems.filter(
-                (item) => item.id !== parseInt(itemId)
-            );
-            newItems = [...filteredItems, item];
+            setErrors(errorsState);
         }
-        newItems.sort((a, b) => a.id - b.id);
-
-        localStorage.setItem("menu-items", JSON.stringify(newItems));
-        setMenuItems(newItems);
-
-        Navigate("/admin/dashboard/menu");
-    }
+    );
 
     return (
         <form className={styles.add} onSubmit={Submit}>
             <input
                 type="text"
-                placeholder="name"
-                value={itemName}
-                onChange={(e) => setItemName(e.currentTarget.value)}
+                placeholder="Name"
+                {...register("name", {
+                    required: true,
+                })}
+            />
+            <input
+                placeholder="Quantity"
+                type="number"
+                {...register("quantity", {
+                    required: true,
+                })}
+            />
+            <input
+                placeholder="Price"
+                type="number"
+                step={0.01}
+                {...register("price", {
+                    required: true,
+                })}
             />
             <TextareaAutosize
-                placeholder="description"
+                placeholder="Description"
                 maxLength={170}
-                value={itemDesc}
-                onChange={(e) => setItemDesc(e.currentTarget.value)}
+                {...register("description", {
+                    required: true,
+                })}
             />
+
+            <input
+                type="file"
+                {...register("image", {
+                    required: true,
+                })}
+            />
+
+            <Select
+                options={options}
+                value={dropdown}
+                onChange={(o) => {
+                    if (o && o.value) setDropdown(o);
+                }}
+            />
+
             <button className={styles.btn} type="submit">
                 Save
             </button>
