@@ -8,6 +8,8 @@ import { MenuList } from "./components/admin/menu-items/menu-list";
 import { MenuForm } from "./components/admin/menu-items/menu-form";
 import { MenuEdit } from "./components/admin/menu-items/menu-edit";
 import { DeliveryList } from "./components/admin/delivery/delivery-list";
+import { AccountChangePassword } from "./components/account-menu/change-password";
+import { AccountInformation } from "./components/account-menu/information";
 
 export const Router = createBrowserRouter([
     {
@@ -33,6 +35,16 @@ export const Router = createBrowserRouter([
             {
                 path: "/account",
                 element: <AccountPage />,
+                children: [
+                    {
+                        path: "information",
+                        element: <AccountInformation />,
+                    },
+                    {
+                        path: "change-password",
+                        element: <AccountChangePassword />,
+                    },
+                ],
             },
             {
                 path: "/admin/dashboard/",

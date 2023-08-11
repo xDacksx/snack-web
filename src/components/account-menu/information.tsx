@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 import { Component } from "../../interfaces/react_element";
 import { useAuth } from "../../hooks/useAuth";
-import styles from "../../scss/pages/account.module.scss";
+import styles from "../../scss/components/account/information.module.scss";
 
 export const AccountInformation: FC<Component> = (): ReactElement => {
     const { AuthStatus } = useAuth();

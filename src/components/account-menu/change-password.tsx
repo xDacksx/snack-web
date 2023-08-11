@@ -1,6 +1,6 @@
 import { FC, ReactElement, useState } from "react";
 import { Component } from "../../interfaces/react_element";
-import styles from "../../scss/pages/account.module.scss";
+import styles from "../../scss/components/account/changePass.module.scss";
 import axios from "axios";
 import { useWebToken } from "../../hooks/useWebToken";
 import { FieldError, useForm } from "react-hook-form";

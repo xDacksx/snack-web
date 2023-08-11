@@ -1,50 +1,11 @@
-import { FC, Fragment, ReactElement, useState } from "react";
+import { FC, ReactElement } from "react";
 import { Component } from "../interfaces/react_element";
 import { Wall } from "../components/auth/wall-auth";
 import styles from "../scss/pages/account.module.scss";
-import { AccountInformation } from "../components/account-menu/information";
-import { AccountChangePassword } from "../components/account-menu/change-password";
 import { useAuth } from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 export const AccountPage: FC<Component> = (): ReactElement => {
-    interface section {
-        id: number;
-        name: string;
-        component: JSX.Element;
-        selected: boolean;
-    }
-    const sectionsDefault: section[] = [
-        {
-            id: 1,
-            name: "Account information",
-            component: <AccountInformation />,
-            selected: true,
-        },
-        {
-            id: 2,
-            name: "Change password",
-            component: <AccountChangePassword />,
-            selected: false,
-        },
-    ];
-
-    const [sections, setSections] = useState<section[]>(sectionsDefault);
-
-    function changeSection(name: string) {
-        const filtered = sections.filter((e) => e.name !== name);
-        filtered.forEach((e) => (e.selected = false));
-
-        const This = sections.filter((e) => e.name === name)[0];
-        This.selected = true;
-
-        const newSections = [...filtered, This];
-
-        newSections.sort((a, b) => a.id - b.id);
-
-        setSections(newSections);
-    }
-
     const { AuthStatus } = useAuth();
 
     return (
@@ -52,36 +13,38 @@ export const AccountPage: FC<Component> = (): ReactElement => {
             <div className={styles.accountPage}>
                 <div className={styles.container}>
                     <div className={styles.menu}>
-                        {sections.map((e, i) => (
-                            <button
-                                key={i}
-                                className={`${styles.button} ${
-                                    e.selected ? styles.selected : ""
-                                }`}
-                                type="button"
-                                onClick={() => changeSection(e.name)}
-                            >
-                                {e.name}
-                            </button>
-                        ))}
+                        <MyLink to="information" text="Account information" />
+                        <MyLink to="change-password" text="Change password" />
                         {AuthStatus.user?.role === "admin" && (
                             <Link
-                                to="/admin/dashboard"
                                 className={styles.button}
-                            >
-                                Admin dashboard
-                            </Link>
+                                to="/admin/dashboard"
+                                children="Admin dashboard"
+                            />
                         )}
                     </div>
                     <div className={styles.content}>
-                        {sections.map((e, i) => (
-                            <Fragment key={i}>
-                                {e.selected && e.component}
-                            </Fragment>
-                        ))}
+                        <Outlet />
                     </div>
                 </div>
             </div>
         </Wall>
     );
 };
+
+const MyLink: FC<MyLink> = ({ to, text }) => {
+    return (
+        <NavLink
+            className={({ isActive }) =>
+                styles.button + (isActive ? ` ${styles.selected}` : "")
+            }
+            to={`/account/${to}`}
+            children={text}
+        />
+    );
+};
+
+interface MyLink {
+    to: string;
+    text: string;
+}
