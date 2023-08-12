@@ -6,13 +6,16 @@ import React from "react";
 import { AuthProvider } from "./context/auth.context.tsx";
 import { NavProvider } from "./context/nav.context.tsx";
 import { MenuProvider } from "./context/menu.context.tsx";
+import { DeliveryProvider } from "./context/delivery.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("snack") as HTMLElement).render(
     <React.StrictMode>
         <AuthProvider>
             <NavProvider>
                 <MenuProvider>
-                    <RouterProvider router={Router} />
+                    <DeliveryProvider>
+                        <RouterProvider router={Router} />
+                    </DeliveryProvider>
                 </MenuProvider>
             </NavProvider>
         </AuthProvider>
