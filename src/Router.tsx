@@ -10,6 +10,7 @@ import { MenuEdit } from "./components/admin/menu-items/menu-edit";
 import { DeliveryList } from "./components/admin/delivery/delivery-list";
 import { AccountChangePassword } from "./components/account-menu/change-password";
 import { AccountInformation } from "./components/account-menu/information";
+import { PlaceInformation } from "./components/admin/information/information";
 
 export const Router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ export const Router = createBrowserRouter([
                     {
                         path: "delivery",
                         element: <DeliveryList />,
+                    },
+                    {
+                        path: "information",
+                        element: <PlaceInformation />,
                     },
                 ],
             },

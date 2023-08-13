@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/auth.context.tsx";
 import { NavProvider } from "./context/nav.context.tsx";
 import { MenuProvider } from "./context/menu.context.tsx";
 import { DeliveryProvider } from "./context/delivery.context.tsx";
+import { ContactProvider } from "./context/contact.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("snack") as HTMLElement).render(
     <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("snack") as HTMLElement).render(
             <NavProvider>
                 <MenuProvider>
                     <DeliveryProvider>
-                        <RouterProvider router={Router} />
+                        <ContactProvider>
+                            <RouterProvider router={Router} />
+                        </ContactProvider>
                     </DeliveryProvider>
                 </MenuProvider>
             </NavProvider>

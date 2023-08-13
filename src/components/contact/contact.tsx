@@ -3,22 +3,25 @@ import { Component } from "../../interfaces/react_element";
 import styles from "../../scss/components/contact.module.scss";
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 import { Map } from "./map";
+import { useContact } from "../../hooks/useContact";
 
 export const ContactInfo: FC<Component> = ({}): ReactElement => {
+    const { Contact } = useContact();
+
     return (
         <div id="information" className={styles.contactInfo}>
             <div className={styles.social}>
                 <h5>Contact information</h5>
-                <a href="">
+                <a href={Contact.whatsapp} target="_blank">
                     <BsWhatsapp /> Whatsapp
                 </a>
-                <a href="">
+                <a href={Contact.facebook} target="_blank">
                     <BsFacebook /> Facebook
                 </a>
-                <a href="">
+                <a href={Contact.instagram} target="_blank">
                     <BsInstagram /> Instagram
                 </a>
-                <a href="">
+                <a href={Contact.x} target="_blank">
                     <XIcon /> X
                 </a>
             </div>
