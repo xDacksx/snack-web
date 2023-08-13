@@ -25,9 +25,7 @@ export const ContactInfo: FC<Component> = ({}): ReactElement => {
                     <XIcon /> X
                 </a>
             </div>
-            <div className={styles.map}>
-                <Map />
-            </div>
+            <Map />
         </div>
     );
 };
