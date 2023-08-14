@@ -19,7 +19,7 @@ export const Menu: FC<Component> = ({}): ReactElement => {
                             title={product.name}
                             description={product.description}
                             price={product.price}
-                            stars={4.5}
+                            quantity={product.quantity}
                             key={product.id}
                         />
                     )
