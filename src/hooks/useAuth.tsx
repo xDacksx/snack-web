@@ -42,23 +42,25 @@ export const useAuth = () => {
 
                 const user = data.data;
 
-                if (data.errors.length > 0) setAuthStatus({ user: null });
-                else {
-                    setAuthStatus({
-                        user: {
-                            email: user.email,
-                            name: user.name,
-                            lastname: user.lastname,
-                            password: user.password,
-                            role: user.role,
-                            gender: user.gender,
-                            createdAt: new Date(user.createdAt),
-                            updatedAt: user.updatedAt
-                                ? new Date(user.updatedAt)
-                                : null,
-                        },
-                    });
-                }
+                if (data.data) {
+                    if (data.errors.length > 0) setAuthStatus({ user: null });
+                    else {
+                        setAuthStatus({
+                            user: {
+                                email: user.email,
+                                name: user.name,
+                                lastname: user.lastname,
+                                password: user.password,
+                                role: user.role,
+                                gender: user.gender,
+                                createdAt: new Date(user.createdAt),
+                                updatedAt: user.updatedAt
+                                    ? new Date(user.updatedAt)
+                                    : null,
+                            },
+                        });
+                    }
+                } else setAuthStatus({ user: null });
             } catch (error) {
                 console.log(error);
             }
