@@ -6,9 +6,7 @@ import {
 import { useWebToken } from "./useWebToken";
 import { MenuContext, MenuItemsType } from "../context/menu.context";
 import { useContext } from "react";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from "../context";
 
 export const useMenu = () => {
     const { MenuItems, setMenuItems } = useContext(
@@ -27,9 +25,13 @@ export const useMenu = () => {
             Form.append("price", `${product.price}`);
             Form.append("image", product.image[0]);
 
-            const { data: res } = await axios.post(`${api}/product/new`, Form, {
-                headers: { Authorization: getHeader() },
-            });
+            const { data: res } = await axios.post(
+                `${apiAddress}/product/new`,
+                Form,
+                {
+                    headers: { Authorization: getHeader() },
+                }
+            );
 
             const newProduct: MenuItem = res.data;
 
@@ -55,7 +57,7 @@ export const useMenu = () => {
             if (product.image) Form.append("image", product.image[0]);
 
             const { data: res } = await axios.post(
-                `${api}/product/${id}/edit`,
+                `${apiAddress}/product/${id}/edit`,
                 Form,
                 {
                     headers: { Authorization: getHeader() },
@@ -73,7 +75,7 @@ export const useMenu = () => {
     }
 
     async function updateProducts() {
-        const { data } = await axios.get(`${api}/product`);
+        const { data } = await axios.get(`${apiAddress}/product`);
 
         if (data && data.data) {
             const products: MenuItem[] = data.data;

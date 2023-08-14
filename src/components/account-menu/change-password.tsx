@@ -4,9 +4,7 @@ import styles from "../../scss/components/account/changePass.module.scss";
 import axios from "axios";
 import { useWebToken } from "../../hooks/useWebToken";
 import { FieldError, useForm } from "react-hook-form";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from "../../context";
 
 export const AccountChangePassword: FC<Component> = ({}): ReactElement => {
     const [errors, setErrors] = useState<string[]>([]);
@@ -27,7 +25,7 @@ export const AccountChangePassword: FC<Component> = ({}): ReactElement => {
             Form.append("password", data.password);
             Form.append("newPassword", data.newPassword);
             const { data: res } = await axios.patch(
-                `${api}/user/change-password`,
+                `${apiAddress}/user/change-password`,
                 Form,
                 {
                     headers: { Authorization: getHeader() },

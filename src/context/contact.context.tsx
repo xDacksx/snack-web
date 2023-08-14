@@ -1,9 +1,7 @@
 import { FC, createContext, useState, useEffect } from "react";
 import { ReactElement } from "../interfaces/react_element";
 import axios from "axios";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from ".";
 
 export const ContactContext = createContext<ContactType | null>(null);
 
@@ -12,7 +10,7 @@ export const ContactProvider: FC<ReactElement> = ({
 }): JSX.Element => {
     async function GetInfo() {
         try {
-            const { data } = await axios.get(`${api}/information`);
+            const { data } = await axios.get(`${apiAddress}/information`);
 
             setContact(data);
         } catch (error) {

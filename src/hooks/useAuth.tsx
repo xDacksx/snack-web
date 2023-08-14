@@ -16,9 +16,7 @@ import {
 } from "../interfaces/axios.interface";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/config";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from "../context";
 
 export const useAuth = () => {
     const { AppLoading, setAppLoading } = useContext(
@@ -34,31 +32,36 @@ export const useAuth = () => {
             sessionStorage.getItem("authorization");
 
         if (authorization) {
-            const { data }: APIResSessionLogin = await axios.get(
-                `${api}/auth/verify`,
-                {
-                    headers: { Authorization: `Bearer ${authorization}` },
+            try {
+                const { data }: APIResSessionLogin = await axios.get(
+                    `${apiAddress}/auth/verify`,
+                    {
+                        headers: { Authorization: `Bearer ${authorization}` },
+                    }
+                );
+
+                const user = data.data;
+
+                if (data.errors.length > 0) setAuthStatus({ user: null });
+                else {
+                    setAuthStatus({
+                        user: {
+                            email: user.email,
+                            name: user.name,
+                            lastname: user.lastname,
+                            password: user.password,
+                            role: user.role,
+                            gender: user.gender,
+                            createdAt: new Date(user.createdAt),
+                            updatedAt: user.updatedAt
+                                ? new Date(user.updatedAt)
+                                : null,
+                        },
+                    });
                 }
-            );
-
-            const user = data.data;
-
-            if (data.errors.length > 0) setAuthStatus({ user: null });
-            else
-                setAuthStatus({
-                    user: {
-                        email: user.email,
-                        name: user.name,
-                        lastname: user.lastname,
-                        password: user.password,
-                        role: user.role,
-                        gender: user.gender,
-                        createdAt: new Date(user.createdAt),
-                        updatedAt: user.updatedAt
-                            ? new Date(user.updatedAt)
-                            : null,
-                    },
-                });
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         setTimeout(() => {
@@ -69,7 +72,7 @@ export const useAuth = () => {
     const SignIn = async (Form: AuthLoginForm): Promise<ResSignIn> => {
         try {
             const { data }: APIResSignIn = await axios.post(
-                `${api}/auth/sign-in`,
+                `${apiAddress}/auth/sign-in`,
                 Form
             );
 
@@ -109,7 +112,7 @@ export const useAuth = () => {
     const SignUp = async (Form: AuthRegisterForm): Promise<ResSignUp> => {
         try {
             const { data }: APIResSignUp = await axios.post(
-                `${api}/auth/sign-up`,
+                `${apiAddress}/auth/sign-up`,
                 Form
             );
 
@@ -161,7 +164,7 @@ export const useAuth = () => {
             };
 
             const { data }: APIResGoogleAuth = await axios.post(
-                `${api}/auth/google-auth`,
+                `${apiAddress}/auth/google-auth`,
                 Form
             );
 

@@ -2,9 +2,7 @@ import { FC, createContext, useState, useEffect } from "react";
 import { ReactElement } from "../interfaces/react_element";
 import axios from "axios";
 import { UserAuthInfo } from "../interfaces/auth.interface";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from ".";
 
 export const DeliveryContext = createContext<DeliveryType | null>(null);
 
@@ -15,7 +13,9 @@ export const DeliveryProvider: FC<ReactElement> = ({
 
     async function getUsers() {
         try {
-            const { data } = await axios.get(`${api}/user/deliverers-list`);
+            const { data } = await axios.get(
+                `${apiAddress}/user/deliverers-list`
+            );
             setDeliveryUsers(data as UserAuthInfo[]);
         } catch (error) {}
     }

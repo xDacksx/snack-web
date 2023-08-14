@@ -4,18 +4,28 @@ import { firebaseConfig } from "../interfaces/auth.interface";
 import { APIResGoogleSignIn } from "../interfaces/axios.interface";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
+import { apiAddress } from "../context";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
-
 async function GetFirebaseKeys(): Promise<firebaseConfig> {
-    const { data }: APIResGoogleSignIn = await axios.get(
-        `${api}/auth/firebase-keys`
-    );
-    const config = data.data;
-    return config;
+    try {
+        const { data }: APIResGoogleSignIn = await axios.get(
+            `${apiAddress}/auth/firebase-keys`
+        );
+        return data.data;
+    } catch (error) {
+        console.log(error);
+        return {
+            apiKey: "",
+            appId: "",
+            authDomain: "",
+            messagingSenderId: "",
+            projectId: "",
+            storageBucket: "",
+        };
+    }
 }
 
 // Your web app's Firebase configuration

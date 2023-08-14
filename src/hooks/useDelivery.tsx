@@ -3,9 +3,7 @@ import { useContext } from "react";
 import { UserAuthInfo } from "../interfaces/auth.interface";
 import { useWebToken } from "./useWebToken";
 import { DeliveryContext, DeliveryType } from "../context/delivery.context";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from "../context";
 
 export const useDelivery = () => {
     const { DeliveryUsers, setDeliveryUsers } = useContext(
@@ -16,7 +14,9 @@ export const useDelivery = () => {
 
     async function getUsers() {
         try {
-            const { data } = await axios.get(`${api}/user/deliverers-list`);
+            const { data } = await axios.get(
+                `${apiAddress}/user/deliverers-list`
+            );
             setDeliveryUsers(data as UserAuthInfo[]);
         } catch (error) {
             console.log(error);
@@ -29,7 +29,7 @@ export const useDelivery = () => {
             Form.append("roleName", "client");
             Form.append("email", email);
             const { data } = await axios.patch(
-                `${api}/user/change-role`,
+                `${apiAddress}/user/change-role`,
                 Form,
                 { headers: { Authorization: getHeader() } }
             );
@@ -43,7 +43,7 @@ export const useDelivery = () => {
             Form.append("roleName", "delivery");
             Form.append("email", email);
             const { data } = await axios.patch(
-                `${api}/user/change-role`,
+                `${apiAddress}/user/change-role`,
                 Form,
                 { headers: { Authorization: getHeader() } }
             );

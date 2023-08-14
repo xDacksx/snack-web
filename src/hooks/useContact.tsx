@@ -6,9 +6,7 @@ import {
     ContactType,
 } from "../context/contact.context";
 import { useWebToken } from "./useWebToken";
-
-const env = import.meta.env;
-const api = env.VITE_SERVER_URL;
+import { apiAddress } from "../context";
 
 export const useContact = () => {
     const { Contact, setContact } = useContext(ContactContext) as ContactType;
@@ -17,7 +15,7 @@ export const useContact = () => {
 
     async function refreshInformation() {
         try {
-            const { data } = await axios.get(`${api}/information`);
+            const { data } = await axios.get(`${apiAddress}/information`);
 
             setContact(data);
         } catch (error) {
@@ -27,9 +25,13 @@ export const useContact = () => {
 
     async function editInformation(Form: ContactInformation) {
         try {
-            const { data } = await axios.patch(`${api}/information`, Form, {
-                headers: { Authorization: getHeader() },
-            });
+            const { data } = await axios.patch(
+                `${apiAddress}/information`,
+                Form,
+                {
+                    headers: { Authorization: getHeader() },
+                }
+            );
 
             await refreshInformation();
             return data;
