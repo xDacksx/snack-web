@@ -28,6 +28,7 @@ export const MobileNav: FC<Component> = (): ReactElement => {
                 {AuthStatus.user ? (
                     <Fragment>
                         <MobileLink to="/account" children="Account" />
+                        <MobileLink to="/account/cart" children="Cart" />
                         <MobileLink
                             to="/"
                             children="Log out"

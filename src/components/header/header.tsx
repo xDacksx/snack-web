@@ -27,9 +27,13 @@ export const Header: FC<Component> = ({}): ReactElement => {
                     <Fragment>
                         <p className={style.phone}>{username}</p>
                         <span className={style.info}>
-                            <button className={style.btn} title="Cart">
+                            <Link
+                                to="/account/cart"
+                                className={style.btn}
+                                title="Cart"
+                            >
                                 <BsCartFill />
-                            </button>
+                            </Link>
                             <Link
                                 className={style.btn + " " + style.user}
                                 title="Account"

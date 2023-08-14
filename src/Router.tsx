@@ -11,6 +11,7 @@ import { DeliveryList } from "./components/admin/delivery/delivery-list";
 import { AccountChangePassword } from "./components/account-menu/change-password";
 import { AccountInformation } from "./components/account-menu/information";
 import { PlaceInformation } from "./components/admin/information/information";
+import { CartPage } from "./pages/cart.page";
 
 export const Router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage />,
+            },
+            {
+                path: "/account/cart",
+                element: <CartPage />,
             },
             {
                 path: "/auth/sign-up",
