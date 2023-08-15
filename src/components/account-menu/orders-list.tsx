@@ -5,8 +5,9 @@ import axios from "axios";
 import { apiAddress } from "../../context";
 import { useWebToken } from "../../hooks/useWebToken";
 import { Link } from "react-router-dom";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { LuPackageCheck } from "react-icons/lu";
 import { MdAttachMoney } from "react-icons/md";
+import { TbTruckDelivery } from "react-icons/tb";
 
 export const OrdersList: FC<Component> = ({}): ReactElement => {
     const [orders, setOrders] = useState<any[]>([]);
@@ -40,6 +41,11 @@ export const OrdersList: FC<Component> = ({}): ReactElement => {
                                     {order.location}
                                 </h3>
                                 <h4 className={styles.id}>{order.id}</h4>
+                                <h4 className={styles.date}>
+                                    {new Date(order.date)
+                                        .toISOString()
+                                        .slice(0, 10)}
+                                </h4>
                             </div>
                             <div className={styles.actions}>
                                 {order.paid ? (
@@ -58,13 +64,28 @@ export const OrdersList: FC<Component> = ({}): ReactElement => {
                                         Pay
                                     </a>
                                 )}
-                                <Link
+                                {order.delivered ? (
+                                    <span
+                                        className={`${styles.payment} ${styles.inway}`}
+                                    >
+                                        Delivered
+                                        <LuPackageCheck />
+                                    </span>
+                                ) : (
+                                    <span
+                                        className={`${styles.payment} ${styles.delivered}`}
+                                    >
+                                        <TbTruckDelivery />
+                                        In its way
+                                    </span>
+                                )}
+                                {/* <Link
                                     className={styles.payment}
                                     to={`/account/orders/${order.id}`}
                                 >
                                     <AiOutlineInfoCircle />
                                     See more
-                                </Link>
+                                </Link> */}
                             </div>
                         </span>
                     </li>

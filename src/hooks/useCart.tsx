@@ -31,15 +31,19 @@ export const useCart = () => {
             if (error instanceof Error) console.warn(error.message);
         }
     }
-    async function buyCart() {
+    async function buyCart(location: string) {
         try {
+            const Form = new FormData();
+
+            Form.append("location", location);
+
             const { data } = await axios.post(
                 `${apiAddress}/user/cart/buy`,
-                undefined,
+                Form,
                 { headers: { Authorization: getHeader() } }
             );
 
-            if (data) {
+            if (data.url) {
                 window.location = data.url;
             }
         } catch (error) {

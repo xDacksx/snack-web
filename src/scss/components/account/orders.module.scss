@@ -47,12 +47,17 @@
                     font-weight: 500;
                 }
 
-                .id {
+                .id,
+                .date {
                     position: absolute;
                     bottom: -0.5rem;
                     left: 0;
                     opacity: 0.25;
                     font-size: 0.8rem;
+                    pointer-events: none;
+                }
+                .date {
+                    top: -0.5rem;
                 }
             }
             .actions {
@@ -100,8 +105,36 @@
                         border-color: $c_green_dark;
                         cursor: default;
                     }
+                    &.paid {
+                        background: $c_green_dark;
+                        color: white;
+                        border-color: $c_green_dark;
+                        cursor: default;
+                    }
+                    &.inway {
+                        background: $c_secondary;
+                        border-color: $c_secondary;
+                        color: white;
+                        cursor: default;
+                    }
+                    &.delivered {
+                        background: $c_red_dark;
+                        border-color: $c_red_dark;
+                        color: white;
+                        cursor: default;
+                    }
                 }
             }
         }
     }
+}
+.infoItem {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    height: 100%;
+    overflow-y: auto;
 }

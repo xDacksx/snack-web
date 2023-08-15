@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from "react";
+import { FC, ReactElement, useEffect, useState, FormEvent } from "react";
 import { Component } from "../interfaces/react_element";
 import { Wall } from "../components/auth/wall-auth";
 import styles from "../scss/pages/cart.module.scss";
@@ -7,6 +7,8 @@ import { useCart } from "../hooks/useCart";
 export const CartPage: FC<Component> = ({}): ReactElement => {
     const { CartItems, buyCart, refreshCart, deleteProduct, addProduct } =
         useCart();
+
+    const [Street, setStreet] = useState("");
 
     const totalAmount =
         CartItems.length > 0
@@ -18,6 +20,12 @@ export const CartPage: FC<Component> = ({}): ReactElement => {
     useEffect(() => {
         refreshCart();
     }, []);
+
+    async function Submit(e: FormEvent) {
+        e.preventDefault();
+
+        await buyCart(Street);
+    }
 
     return (
         <Wall mode="need-auth">
@@ -60,17 +68,26 @@ export const CartPage: FC<Component> = ({}): ReactElement => {
                             </h2>
                         )}
                     </div>
-                    <div className={styles.checkout}>
+                    <form className={styles.checkout} onSubmit={Submit}>
+                        <input
+                            type="text"
+                            placeholder="Street"
+                            onChange={(e) => setStreet(e.target.value)}
+                        />
                         <p className={styles.total}>
                             Total: $
                             {CartItems.length > 0
                                 ? totalAmount.toFixed(2)
                                 : (0).toFixed(2)}
                         </p>
-                        <button className={styles.btn} onClick={buyCart}>
+                        <button
+                            className={styles.btn}
+                            type="submit"
+                            disabled={CartItems.length < 1 || Street.length < 1}
+                        >
                             BUY
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </Wall>
