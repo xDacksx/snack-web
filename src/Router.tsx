@@ -12,6 +12,7 @@ import { AccountChangePassword } from "./components/account-menu/change-password
 import { AccountInformation } from "./components/account-menu/information";
 import { PlaceInformation } from "./components/admin/information/information";
 import { CartPage } from "./pages/cart.page";
+import { OrdersList } from "./components/account-menu/orders-list";
 
 export const Router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const Router = createBrowserRouter([
                     {
                         path: "change-password",
                         element: <AccountChangePassword />,
+                    },
+                    {
+                        path: "orders",
+                        element: <OrdersList />,
                     },
                 ],
             },
