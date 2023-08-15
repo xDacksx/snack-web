@@ -14,6 +14,7 @@ export const AccountPage: FC<Component> = (): ReactElement => {
                 <div className={styles.container}>
                     <div className={styles.menu}>
                         <MyLink to="information" text="Account information" />
+                        <MyLink to="orders" text="My orders" />
                         {!AuthStatus.user?.google && (
                             <MyLink
                                 to="change-password"
