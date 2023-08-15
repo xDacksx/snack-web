@@ -1,0 +1,107 @@
+@use "../../colours" as *;
+.list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    height: 100%;
+    overflow-y: auto;
+    li {
+        // background: red;
+        width: 100%;
+        height: 6rem;
+        list-style: none;
+        .item {
+            display: flex;
+            flex-flow: row, nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+
+            background: #ddd;
+            border-radius: 6px;
+            filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
+
+            .info {
+                display: flex;
+                flex-flow: row, nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1rem;
+
+                position: relative;
+                width: 70%;
+                height: 100%;
+
+                & > * {
+                    color: $c_gray;
+                }
+
+                .money,
+                .address {
+                    font-weight: 500;
+                }
+
+                .id {
+                    position: absolute;
+                    bottom: -0.5rem;
+                    left: 0;
+                    opacity: 0.25;
+                    font-size: 0.8rem;
+                }
+            }
+            .actions {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 0.25rem;
+
+                width: 30%;
+                height: 100%;
+                .payment {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    width: 100%;
+                    height: 50%;
+
+                    background: transparent;
+                    border: 1px solid $c_gray;
+                    border-radius: 3px;
+                    cursor: pointer;
+
+                    font-family: "Gelion";
+                    font-size: 0.95rem;
+                    text-decoration: none;
+                    color: $c_gray;
+
+                    transition: 0.25s ease background, 0.25s ease color;
+                    &:hover {
+                        background: $c_gray;
+                        color: white;
+                    }
+                    svg {
+                        position: absolute;
+                        left: 0.5rem;
+                    }
+
+                    &.paid {
+                        background: $c_green_dark;
+                        color: white;
+                        border-color: $c_green_dark;
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+}
