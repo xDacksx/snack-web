@@ -20,6 +20,7 @@ export interface UserAuthInfo {
 
     name: string;
     lastname: string;
+    google: boolean;
 
     role: "client" | "admin" | "delivery";
     gender: string;

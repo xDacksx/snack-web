@@ -21,6 +21,7 @@ export const Menu: FC<Component> = ({}): ReactElement => {
                             price={product.price}
                             quantity={product.quantity}
                             key={product.id}
+                            id={product.id}
                         />
                     )
             )}

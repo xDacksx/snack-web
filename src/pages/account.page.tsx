@@ -14,7 +14,12 @@ export const AccountPage: FC<Component> = (): ReactElement => {
                 <div className={styles.container}>
                     <div className={styles.menu}>
                         <MyLink to="information" text="Account information" />
-                        <MyLink to="change-password" text="Change password" />
+                        {!AuthStatus.user?.google && (
+                            <MyLink
+                                to="change-password"
+                                text="Change password"
+                            />
+                        )}
                         {AuthStatus.user?.role === "admin" && (
                             <Link
                                 className={styles.button}

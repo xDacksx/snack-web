@@ -146,9 +146,41 @@
                     text-transform: uppercase;
                     pointer-events: all;
                     cursor: pointer;
+                    position: relative;
                     &:active,
                     &:hover {
                         background: $c_text_dark;
+                    }
+
+                    .noti {
+                        content: "+1";
+                        width: 100%;
+                        height: 100%;
+                        background: $c_gray;
+                        position: absolute;
+                        left: 0;
+                        border-radius: 30px;
+                        color: $c_text;
+
+                        display: flex;
+                        flex-flow: row nowrap;
+                        justify-content: center;
+                        align-items: center;
+
+                        opacity: 0;
+                        transition: opacity 0.35s ease;
+
+                        &.fail {
+                            background: $c_red_dark;
+                            svg {
+                                color: white;
+                            }
+                        }
+                        &.shown {
+                            transition: opacity 0.5s ease;
+
+                            opacity: 1;
+                        }
                     }
                 }
             }
