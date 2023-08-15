@@ -13,6 +13,8 @@ import { AccountInformation } from "./components/account-menu/information";
 import { PlaceInformation } from "./components/admin/information/information";
 import { CartPage } from "./pages/cart.page";
 import { OrdersList } from "./components/account-menu/orders-list";
+import { OrderPage } from "./pages/orderSucess.page";
+import { OrderInfo } from "./components/account-menu/order-info";
 
 export const Router = createBrowserRouter([
     {
@@ -40,6 +42,10 @@ export const Router = createBrowserRouter([
                 element: <AuthPage />,
             },
             {
+                path: "/orders/success/:secret/:id",
+                element: <OrderPage />,
+            },
+            {
                 path: "/account",
                 element: <AccountPage />,
                 children: [
@@ -54,6 +60,10 @@ export const Router = createBrowserRouter([
                     {
                         path: "orders",
                         element: <OrdersList />,
+                    },
+                    {
+                        path: "orders/:id",
+                        element: <OrderInfo />,
                     },
                 ],
             },
